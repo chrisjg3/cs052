@@ -1,0 +1,44 @@
+/*
+* <FileName>.<file extension>
+*
+* COSC 052 <term year>
+* Project <>
+*
+* Due on: <Due Date>
+* Author: <your name>
+*
+*
+* In accordance with the class policies and Georgetown's
+* Honor Code, I certify that, with the exception of the
+* class resources and those items noted below, I have neither
+* given nor received any assistance on this project.
+*
+* References not otherwise commented within the program source code.
+* Note that you should not mention any help from the TAs, the professor,
+* or any code taken from the class textbooks.
+*/
+
+#ifndef HTMLSTUDENTTABLE_H
+#define HTMLSTUDENTTABLE_H
+
+#include <iostream>
+#include <vector>
+#include "Student.h"
+using namespace std;
+
+//Class Starts
+class HtmlStudentTable 
+{
+    // Priavte Starts Here:
+    private:
+    vector<Student>studentVec;
+
+    // Public Starts Here:
+    public:
+    inline HtmlStudentTable(vector<Student>);
+
+    // ostream decalred friend so that table can be read from cout
+    friend ostream &operator<<(ostream& out, const HtmlStudentTable &set);
+};
+
+#endif
