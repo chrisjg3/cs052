@@ -1,11 +1,11 @@
 /*
-* <FileName>.<file extension>
+* HtmlStudentTable.cpp
 *
-* COSC 052 <term year>
-* Project <>
+* COSC 052 2020
+* Project 1
 *
-* Due on: <Due Date>
-* Author: <your name>
+* Due on: July 7th, 2020
+* Author: Christopher Gallo
 *
 *
 * In accordance with the class policies and Georgetown's
@@ -21,7 +21,7 @@
 #include "HtmlStudentTable.h"
 
 // Building a table constructor (from student class vector)
-HtmlStudentTable::HtmlStudentTable(vector<Student> inputStudentVector)
+inline HtmlStudentTable::HtmlStudentTable(vector<Student> inputStudentVector)
 {
     for(unsigned short i = 0; i<inputStudentVector.size(); i++)
     {

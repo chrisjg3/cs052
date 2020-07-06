@@ -1,11 +1,11 @@
 /*
-* <FileName>.<file extension>
+* Student.cpp
 *
-* COSC 052 <term year>
-* Project <>
+* COSC 052 2020
+* Project 1
 *
-* Due on: <Due Date>
-* Author: <your name>
+* Due on: July 7th, 2020
+* Author: Christopher Gallo
 *
 *
 * In accordance with the class policies and Georgetown's
@@ -20,15 +20,8 @@
 
 #include "Student.h"
 
-// Defining the "Get" Accessor functions
-inline string Student::getName() const { return name; }
-inline int Student::getScore() const { return score; }
 
-// Defining the "Set" Mutator Functions
-inline void Student::setName(string inputname) {name = inputname; }
-inline void Student::setScore(int inputscore) {score = inputscore; }
-
-inline Student::Student(string inputname, int inputscore)
+Student::Student(string inputname, float inputscore)
 {
     name = inputname;
     score = inputscore;

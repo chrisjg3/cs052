@@ -1,11 +1,11 @@
 /*
-* <FileName>.<file extension>
+* project1.cpp
 *
-* COSC 052 <term year>
-* Project <>
+* COSC 052 2020
+* Project 1
 *
-* Due on: <Due Date>
-* Author: <your name>
+* Due on: July 7th, 2020
+* Author: Christopher Gallo
 *
 *
 * In accordance with the class policies and Georgetown's
@@ -17,8 +17,10 @@
 * Note that you should not mention any help from the TAs, the professor,
 * or any code taken from the class textbooks.
 */
-
 #include "project1.h"
+
+const int MINSCORE = 0;
+const int MAXSCORE = 100;
 
 int main()
 {
@@ -38,7 +40,7 @@ int main()
             cout<<"Please enter the file name: \n";
             string fileName;
             cin>>fileName;
-            // Input function
+            inputFile(fileName, StudentVec);
         }
         else if (choice == '2')
         {
@@ -70,7 +72,7 @@ char displayMenu()
     cout<<"Please select an option:\n\n";
     cout<<"1. Input Students From File\n";
     cout<<"2. Use Console to Input Students\n";
-    cout<<"3. Exit Program \n \n";
+    cout<<"3. Exit Program \n\n";
     cin>>choice;
     
     // return the choice so main knows what to run.
@@ -86,20 +88,58 @@ void consoleInput(vector<Student>& studentVec)
     while (consoleActive) {
         // inputName and inputScore defined to get name before data verification
         string inputName;
-        int inputScore;
+        float inputScore;
         cout<<"\n\n";
 
         // Name Input
-        cout<<"Input Student Name:\n";
-        cin>>inputName;
-        cout<<"\n";
+        bool isError = false;
+        int spaceCount = 0;
+        // cin.ignore needed to clear buffer after menu option cin
+        cin.ignore();
+
+        // Starts do-while loop for inputting name and the name data verification
+        do {
+        cout<<"Input Student Name:\n (Can include up to 4 names: First, Middle, Maiden, and Last)\n";
+        getline(cin, inputName);
+
         // Name Data Verification
+        isError = false;
+        spaceCount = 0;
+
+        for(int i = 0; i<inputName.size(); i++)
+        {
+            if(inputName[i] == ' ')
+            {
+                spaceCount++;
+            }
+
+            if(inputName[i] == '-')
+            {
+                cout<<"Error, no hyphens allowed."<<endl;
+                isError = true;
+                break;
+            }
+
+            if(spaceCount > 3)
+            {
+                cout<<"Error, too many names"<<endl;
+                isError = true;
+                break;
+            }
+        }
+        cout<<endl;
+        } while (isError);
         cout<<endl;
 
         // Score Input
-        cout<<"Input Student Score: \n";
+        cout<<"Input Student Score: (Between 0 and 100) \n";
         cin>>inputScore;
-        // Score Verification
+        // Data Validation
+        while(inputScore < MINSCORE || inputScore > MAXSCORE)
+        {
+            cout<<"Error, please enter a score between 0 and 100.\n";
+            cin>>inputScore;
+        }
         cout<<endl;
 
         Student student1 = Student(inputName, inputScore);
@@ -119,26 +159,109 @@ void consoleInput(vector<Student>& studentVec)
 }
 
 // File Input
-void inputFile(string fileName, vector<Student> &)
+void inputFile(string fileName, vector<Student> &stuVec)
 {
     string inputName;
-    int inputScore;
+    float inputScore;
+    string inputline;
     string linetrash;
-    ifstream riskFile;
-    int rowCounter = 1;
+    ifstream studentFile;
+    char comma;
+    // Row counter used to identify errors in while loop
+    int rowCounter = 0;
 
-    riskFile.open(fileName.c_str());
-    if (!(riskFile)) {
+    studentFile.open(fileName.c_str());
+    if (!(studentFile)) {
         cout<<"Error, No File Found."<<"\n\n";
         return;
     }
     
     // This getline removes the first row, which is the column names.
-    getline(riskFile,linetrash);
+    getline(studentFile,linetrash);
     cout<<endl;
 
     // Looping through the file to read the contents
-    while (riskFile >> inputName) {
-        
+    // This will read in the first part before the comma
+    // AKA this is the section that deals with the NAME
+    while (getline(studentFile,inputline, ',')) {
+        // Keeping Track of Row for Error Messages:
+        rowCounter++;
+        // Keeps track of spaces for Name Data Verification
+        int spaceCount = 0;
+        bool isError = false;
+
+        // Name Verification Section
+        inputName = inputline;
+        // Goes throw entire Name string and counts spaces (for number of names)
+        // And checks for hypthens
+        for(int i = 0; i<inputName.size(); i++)
+        {
+            // Each character is read in and is checked if space to count spaces:
+            if(inputName[i] == ' ')
+            {
+                spaceCount++;
+            }
+            // Then character is checked if it is a hypehn (which isn't allowed)
+            if(inputName[i] == '-')
+            {
+                // If hyphen is found, code will display error the mark isError true
+                // And exit the for loop, as the name is not valid so will stop being read
+                cout<<"Error on line "<<rowCounter<<", no hyphens allowed."<<endl;
+                isError = true;
+                break;
+            }
+
+            // This checks after each character if the number of cumulative spaces 
+            // is now greater then 3, which means more than 4 names were entered.
+            if(spaceCount > 3)
+            {
+                // If more than allowed names (signified by too many spaces) is found
+                // code displays error, marks isError true, then exits the for loop. 
+                cout<<"Error on line "<<rowCounter<<", too many names"<<endl;
+                isError = true;
+                break;
+            }
+        }
+        // This is to check if an Error was found, aka did it run fully or exit with one
+        // of those if statements, signifying an invalid name.
+        if(isError)
+        {
+            // If there was an error, then this trashes the rest of the line and 
+            // restarts while loop:
+            getline(studentFile, inputline);
+            continue;
+        }
+
+        // This now reads to the next comma
+        // AKA this section now reads the SCORE
+        studentFile>> inputScore;
+
+        // Score Verfication Section
+        if(inputScore < MINSCORE || inputScore > MAXSCORE)
+        {   // This is only executed on an error
+            cout<<"Error with Score on line "<<rowCounter<<endl;
+            cout<<"Moving to next row"<<endl;
+            
+            // Trash rest of the line and then use continue to restart
+            getline(studentFile, inputline);
+            continue;
+        }
+
+        // This line gets rid of the comma and \n character after score
+        getline(studentFile, inputline);
+
+
+        // This is only reached if everything was verified, so 
+        // then the two variables are used to create a Student and add them 
+        // to the vecture.
+        stuVec.push_back(Student(inputName, inputScore));
     }
+    // Reaches the end of input from file
+    cout<<endl;
+    cout<<"File End. Closing file and printing out HTML table...\n\n";
+    // Closes file:
+    studentFile.close();
+    // prints html file:
+    HtmlStudentTable table = HtmlStudentTable(stuVec);
+    cout<<table<<endl;
 }

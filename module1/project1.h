@@ -1,11 +1,11 @@
 /*
-* <FileName>.<file extension>
+* project1.h
 *
-* COSC 052 <term year>
-* Project <>
+* COSC 052 2020
+* Project 1
 *
-* Due on: <Due Date>
-* Author: <your name>
+* Due on: July 7th, 2020
+* Author: Christopher Gallo
 *
 *
 * In accordance with the class policies and Georgetown's
@@ -21,10 +21,14 @@
 #ifndef PROJECT1_H
 #define PROJECT1_H
 
+
+
 #include <iostream>
 #include <vector>
-#include "Student.cpp"
+#include <fstream>
+#include <istream>
 #include "HtmlStudentTable.cpp"
+#include "Student.cpp"
 
 using namespace std;
 
@@ -43,18 +47,23 @@ vector<Student>StudentVec;
 
 
 /* TO DO:
-1. Input File and Input Console Should be stand alone functions?
+1. Check Web and fix this duplicate file error problem
 2. Check for any 'magic numbers'
 3. Move single line defintions into header files
 4. Make sure Syntax of #endif and #ifndef/#define is all correct / Specifics of mechanics
 5. Print at end on Console and At end of File?
-6. Correct the Student Honor Code Comments on Each File
-7. Why did inline work?
+6. Check the Student Honor Code Comments on Each File
+
 8. Add Comments Everywhere
 9. Review PDF and make sure everything required and on rubric matches
-10. Look through code and clean up cin.ignores and extra things that are not needed like inline
-11. Need to make sure all the things set for presentation (espcially in input console) and removed or corrected
+10. Look through code and clean up any un-needed lines and code (Need to make sure all the things set for presentation were removed)
+
 12. Add Default contructors and such
+
+14. Make HTML table pass by refernece
+15. Test compile on course server
+16. Double check all best practices (like default constructor and destructor and such)
+17. Should be using set functions, but I don't think they are anywhere
 */
 
 #endif

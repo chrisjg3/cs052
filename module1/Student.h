@@ -1,11 +1,11 @@
 /*
-* <FileName>.<file extension>
+* Student.h
 *
-* COSC 052 <term year>
-* Project <>
+* COSC 052 2020
+* Project 1
 *
-* Due on: <Due Date>
-* Author: <your name>
+* Due on: July 7th, 2020
+* Author: Christopher Gallo
 *
 *
 * In accordance with the class policies and Georgetown's
@@ -17,9 +17,9 @@
 * Note that you should not mention any help from the TAs, the professor,
 * or any code taken from the class textbooks.
 */
-
 #ifndef STUDENT_H
 #define STUDENT_H
+
 
 
 #include <iostream>
@@ -31,18 +31,19 @@ class Student
     // Priavte Starts Here
     private:
     string name;
-    int score;
+    float score;
 
     // Public Starts Here
     public:
     // Get Accessor Functions
-    string getName() const;
-    int getScore() const;
-    // Set Mutator Functions
-    void setName(string name);
-    void setScore(int score);
+    string getName() const { return name; }
+    float getScore() const { return score; }
 
-    Student(string name, int score);
+    // Set Mutator Functions
+    void setName(string inputname) {name = inputname; }
+    void setScore(float inputscore) {score = inputscore; }
+
+    Student(string name, float score);
 };
 
 #endif
