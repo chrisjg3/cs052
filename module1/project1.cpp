@@ -17,8 +17,9 @@
 * Note that you should not mention any help from the TAs, the professor,
 * or any code taken from the class textbooks.
 */
-#include "project1.h"
+#include "Project1.h"
 
+// Global Constant for Score Boundaries
 const int MINSCORE = 0;
 const int MAXSCORE = 100;
 
@@ -37,6 +38,7 @@ int main()
         // Determine what to run based on choice
         if (choice == '1')
         {
+            // File Input Option Here:
             cout<<"Please enter the file name: \n";
             string fileName;
             cin>>fileName;
@@ -44,15 +46,18 @@ int main()
         }
         else if (choice == '2')
         {
-           consoleInput(StudentVec);
+            // Console Input Option Here:
+            consoleInput(StudentVec);
         }
         else if (choice == '3')
         {
+            // Exit Option Here:
             cout<<"Exiting..."<<endl;
             menuActive = false;
         }
         else 
         {
+            // This is reached if invalid option put in for menu
             cout<<"Error, Please Select a Valid Option. \n\n";
             cout<<"Returning to Menu..."<<endl;
         }
@@ -61,7 +66,7 @@ int main()
     return 0;
 }
 
-
+// Code for display menu
 char displayMenu()
 {
     // choice is used to store the menu option selected.
@@ -83,8 +88,10 @@ char displayMenu()
 // Console Input
 void consoleInput(vector<Student>& studentVec)
 {
+    // Variables for interactiving with console:
     bool consoleActive = true;
     char consolechoice;
+    // while loop is the actual console menu:
     while (consoleActive) {
         // inputName and inputScore defined to get name before data verification
         string inputName;
@@ -99,35 +106,48 @@ void consoleInput(vector<Student>& studentVec)
 
         // Starts do-while loop for inputting name and the name data verification
         do {
-        cout<<"Input Student Name:\n (Can include up to 4 names: First, Middle, Maiden, and Last)\n";
-        getline(cin, inputName);
+            cout<<"Input Student Name:\n (Can include up to 4 names: First, Middle, Maiden, and Last)\n";
+            getline(cin, inputName);
 
-        // Name Data Verification
-        isError = false;
-        spaceCount = 0;
+            // Name Data Verification
+            // isError and spaceCount reset each time so that after error the input can be revalidated
+            isError = false;
+            spaceCount = 0;
 
-        for(int i = 0; i<inputName.size(); i++)
-        {
-            if(inputName[i] == ' ')
+            // this for loop runs through the entered string by each character
+            // for data validation
+            for(int i = 0; i<inputName.size(); i++)
             {
-                spaceCount++;
-            }
+                // This counts if each character is a space to check the number of names entered
+                if(inputName[i] == ' ')
+                {
+                    spaceCount++;
+                }
 
-            if(inputName[i] == '-')
-            {
-                cout<<"Error, no hyphens allowed."<<endl;
-                isError = true;
-                break;
-            }
+                // This checks if the character is a hypthen, which is not allowed
+                if(inputName[i] == '-')
+                {   
+                    // If hyphen detected, error dispalyed and isError set to true
+                    // Then break leaves for loop since no need to check the rest of the word
+                    cout<<"Error, no hyphens allowed."<<endl;
+                    isError = true;
+                    break;
+                }
 
-            if(spaceCount > 3)
-            {
-                cout<<"Error, too many names"<<endl;
-                isError = true;
-                break;
+                // This is checks after each character if there have been too many spaces
+                // (And therefore too many names)
+                if(spaceCount > 3)
+                {
+                    // This is reached if too many names entered
+                    // If hyphen detected, error dispalyed and isError set to true
+                    // Then break leaves for loop since no need to check the rest of the word
+                    cout<<"Error, too many names"<<endl;
+                    isError = true;
+                    break;
+                }
             }
-        }
         cout<<endl;
+        // This is the end of the do-while loop. This will continue until while those above if statements are triggered
         } while (isError);
         cout<<endl;
 
@@ -137,23 +157,47 @@ void consoleInput(vector<Student>& studentVec)
         // Data Validation
         while(inputScore < MINSCORE || inputScore > MAXSCORE)
         {
+            // This is reached only if score not between 0-100 is reached
             cout<<"Error, please enter a score between 0 and 100.\n";
             cin>>inputScore;
         }
         cout<<endl;
 
+        // When this is reached, all data is validated.
+        // It is used to create a Student instance, then pushed into the vector
         Student student1 = Student(inputName, inputScore);
         studentVec.push_back(student1);
 
-        //Need to revisit
-        cout<<"Would you like to add another? (y or n) \n";
-        cin>>consolechoice;
-        if (consolechoice == 'n')
-        { 
-        consoleActive = false;
-        cout<<"Displaying HTML Table....\n\n";
-        HtmlStudentTable table = HtmlStudentTable(studentVec);
-        cout<<table<<endl;
+        // Ask enter another individual
+        // While loop can only be left with a break command (entering y or n)
+        while(true)
+        {
+            // Prompting to enter another or return to menu
+            cout<<"Select whether to add another individual or return to menu: \n\n";
+            cout<<"1. Enter another person\n";
+            cout<<"2. Return to menu\n";
+            cin>>consolechoice;
+            // I listed 'return to menu' first as it has the more important code
+            if (consolechoice == '2')
+            { 
+            consoleActive = false;
+            cout<<"Displaying HTML Table....\n\n";
+            // Html Table built (When object created, file is created)
+            HtmlStudentTable table = HtmlStudentTable(studentVec);
+            // This cout stream prints the table to console
+            cout<<table<<endl;
+            // this break exists the loop, then (now that console is false) the program will
+            // go to outer loop and exit to menu
+            break;
+            }
+            // This is for adding another student
+            else if(consolechoice == '1')
+            {
+                // the console is already active, so just need to break if adding another
+                break;
+            }
+            // Else for if they select something other than 1 or 2
+            else { cout<< "\n Enter a valid option \n";}
         }
     }
 }
@@ -161,18 +205,23 @@ void consoleInput(vector<Student>& studentVec)
 // File Input
 void inputFile(string fileName, vector<Student> &stuVec)
 {
+    // Variables for Reading Data:
     string inputName;
     float inputScore;
     string inputline;
     string linetrash;
-    ifstream studentFile;
     char comma;
-    // Row counter used to identify errors in while loop
+    // Variables for input and output streams:
+    ifstream studentFile;
+    ofstream outputFile;
+    // Row counter used to identify rows with errors in while loop
     int rowCounter = 0;
 
+    // Attempt to open file here:
     studentFile.open(fileName.c_str());
     if (!(studentFile)) {
-        cout<<"Error, No File Found."<<"\n\n";
+        // Error displayed and returned to menu if no file found
+        cout<<"\nError, No File Found."<<"\n\n";
         return;
     }
     
@@ -201,7 +250,7 @@ void inputFile(string fileName, vector<Student> &stuVec)
             {
                 spaceCount++;
             }
-            // Then character is checked if it is a hypehn (which isn't allowed)
+            // Then character is checked if it is a hyphen (which isn't allowed)
             if(inputName[i] == '-')
             {
                 // If hyphen is found, code will display error the mark isError true
@@ -226,7 +275,7 @@ void inputFile(string fileName, vector<Student> &stuVec)
         // of those if statements, signifying an invalid name.
         if(isError)
         {
-            // If there was an error, then this trashes the rest of the line and 
+            // If there was an error, then this trashes the rest of the line (flushes buffer) and 
             // restarts while loop:
             getline(studentFile, inputline);
             continue;
@@ -261,7 +310,9 @@ void inputFile(string fileName, vector<Student> &stuVec)
     cout<<"File End. Closing file and printing out HTML table...\n\n";
     // Closes file:
     studentFile.close();
-    // prints html file:
+    
+    // Html Table built (When object created, file is created)
     HtmlStudentTable table = HtmlStudentTable(stuVec);
+    // Prints html table to console:
     cout<<table<<endl;
 }

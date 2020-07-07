@@ -28,7 +28,7 @@ using namespace std;
 // Class Starts
 class Student
 {
-    // Priavte Starts Here
+    // Private Starts Here
     private:
     string name;
     float score;
@@ -39,11 +39,18 @@ class Student
     string getName() const { return name; }
     float getScore() const { return score; }
 
-    // Set Mutator Functions
+    // Set Mutator Functions - Not Used Currently
     void setName(string inputname) {name = inputname; }
     void setScore(float inputscore) {score = inputscore; }
 
+    // This is the main Constructor used for building Student objects
     Student(string name, float score);
+
+    // Default Consturctor
+    Student();
+
+    // Destructor
+    ~Student();
 };
 
 #endif

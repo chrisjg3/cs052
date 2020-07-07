@@ -17,14 +17,17 @@
 * Note that you should not mention any help from the TAs, the professor,
 * or any code taken from the class textbooks.
 */
+
 #ifndef HTMLSTUDENTTABLE_H
 #define HTMLSTUDENTTABLE_H
 
-
-
+// Modules
 #include <iostream>
 #include <vector>
+#include <fstream>
+// Header Files needed:
 #include "Student.h"
+
 using namespace std;
 
 //Class Starts
@@ -36,8 +39,15 @@ class HtmlStudentTable
 
     // Public Starts Here:
     public:
-    HtmlStudentTable(vector<Student>);
+    // This is the main constructor that will be used:
+    HtmlStudentTable(vector<Student>&);
 
+    // Default Constructor
+    HtmlStudentTable();
+    // Destructor
+    ~HtmlStudentTable();
+
+    
     // ostream decalred friend so that table can be read from cout.
     friend ostream &operator<<(ostream& out, const HtmlStudentTable &set);
 };

@@ -27,8 +27,10 @@
 #include <vector>
 #include <fstream>
 #include <istream>
-#include "HtmlStudentTable.cpp"
-#include "Student.cpp"
+#include "Student.h"
+#include "HtmlStudentTable.h"
+// #include "HtmlStudentTable.cpp"
+// #include "Student.cpp"
 
 using namespace std;
 
@@ -47,23 +49,43 @@ vector<Student>StudentVec;
 
 
 /* TO DO:
-1. Check Web and fix this duplicate file error problem
+
+
+3. Check MakeFile Works
+1. MAKE SURE TO DELETE THIS TO DO LIST
+
+
+
+
+
+
+
+
+Last-minute before submit:
+1. MAKE SURE TO DELETE THIS TO DO LIST
 2. Check for any 'magic numbers'
-3. Move single line defintions into header files
-4. Make sure Syntax of #endif and #ifndef/#define is all correct / Specifics of mechanics
-5. Print at end on Console and At end of File?
+18. Double check everything on course server
 6. Check the Student Honor Code Comments on Each File
-
-8. Add Comments Everywhere
-9. Review PDF and make sure everything required and on rubric matches
 10. Look through code and clean up any un-needed lines and code (Need to make sure all the things set for presentation were removed)
-
-12. Add Default contructors and such
-
-14. Make HTML table pass by refernece
-15. Test compile on course server
-16. Double check all best practices (like default constructor and destructor and such)
-17. Should be using set functions, but I don't think they are anywhere
+7.  Double check cleaning up any lines
+4. Make sure Syntax of #endif and #ifndef/#define is all correct / Specifics of mechanics
+15. Double check names for files and zip
+11. What you gonna do about set functions?
+8. Run the whole thing again on console doing errors on file and console input, error to find file, adding to display, check if file created good
 */
+
+
+// Ask for TA
+// Ask about constructor and desctructor for Student adn HtmlStudentTable
+// Makefile including the c++11 and -o
+// with  --stdc++11 is it in the right place for -o
+// Clean cleans the the old object out or all?  Check makefile comment
+// Is table output in the right place?
+// Maybe run through and see if they have any concepts
+// Genuine curious: how to know what order to do .cpp, what does obj file look like?
+// Any best practices we might forget? 16. Any other best practices you could be forgetting?
+
+
+
 
 #endif

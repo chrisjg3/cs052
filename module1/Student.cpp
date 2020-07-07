@@ -18,11 +18,25 @@
 * or any code taken from the class textbooks.
 */
 
+// Header file:
 #include "Student.h"
 
-
+// This is the defintion of the main student contructor
 Student::Student(string inputname, float inputscore)
 {
     name = inputname;
     score = inputscore;
+}
+
+// Default Consturctor
+Student::Student()
+{
+    name = "\0";
+    score = 0;
+}
+
+// Destructor
+Student::~Student()
+{
+
 }
