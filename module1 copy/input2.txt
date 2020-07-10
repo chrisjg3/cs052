@@ -1,7 +1,0 @@
-Student,Score,
-Ann Bowmann,79,
-Alfred Lopez J J Ka,80,
-Second Bowmann,69,
-Latoya Brown,107,
-Third Towmann,10,
-Fourth Towmann Ann Steve,1,
