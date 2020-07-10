@@ -32,7 +32,7 @@ Student::Student(string inputname, float inputscore)
 Student::Student()
 {
     name = "\0";
-    score = 0;
+    score = 0.0;
 }
 
 // Destructor

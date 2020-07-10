@@ -1,5 +1,5 @@
 /*
-* project1.cpp
+* Project1.cpp
 *
 * COSC 052 2020
 * Project 1
@@ -17,11 +17,25 @@
 * Note that you should not mention any help from the TAs, the professor,
 * or any code taken from the class textbooks.
 */
+
+// Header File
 #include "Project1.h"
 
 // Global Constant for Score Boundaries
 const int MINSCORE = 0;
 const int MAXSCORE = 100;
+
+// Stand-Alone Display Menu Function for Menu Options
+char displayMenu();
+
+// Stand-Alone Function For Reading File
+void inputFile(string, vector<Student>&);
+
+// Stand-Alone Function For Console Input
+void consoleInput(vector<Student>&);
+
+// Vector of Student objects defined
+vector<Student>StudentVec;
 
 int main()
 {

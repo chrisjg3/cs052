@@ -1,0 +1,4 @@
+Student,Score,
+Ann Bowmann,79,
+Alfred Lopez,80,
+Latoya Brown,77,

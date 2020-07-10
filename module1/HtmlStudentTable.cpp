@@ -84,13 +84,12 @@ ostream &operator<<(ostream& out, const HtmlStudentTable &table)
 // Default Constructor
 HtmlStudentTable::HtmlStudentTable()
 {
-
+ // Will have a empty vector from class definition
 }
-
 
 
 // Destructor
 HtmlStudentTable::~HtmlStudentTable()
 {
-
+studentVec.clear();
 }
