@@ -107,19 +107,27 @@ void DayOfYear::print() {
 }
 
 
+
+using namespace std;
+
 int main()
 {
-        int inputDay;
-        cout<<"Input Day of Year: (below 0 or above 365 closes program) \n";
-        cin>>inputDay;
-
-        if(inputDay < 0 || inputDay >365)
-        {
-            cout<<"Closing...";
-        }
-        else{
-        DayOfYear markedDay = DayOfYear(inputDay);
-        markedDay.print();
-        }
-    return 0;
+	int inputDay;
+	cout<<"Using the first constructor that only requires the day of the year (1-365).\n";
+	
+	cout<<"Enter the a day of the year or a number <=0 to end:";
+	cin>>inputDay;
+	
+	if(inputDay > 365 || inputDay < 0)
+	{
+		cout<<"Program terminating: The day entered is >365.\n";
+	}
+	
+	else
+	{
+		DayOfYear(inputDay);
+	}
+			
+	
+	return 0;
 }

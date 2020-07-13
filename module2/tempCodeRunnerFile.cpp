@@ -1,1 +1,2 @@
-DayOfYear
+
+    return 0;
