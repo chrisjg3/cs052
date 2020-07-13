@@ -125,7 +125,8 @@ int main()
 	
 	else
 	{
-		DayOfYear(inputDay);
+		DayOfYear storedday = DayOfYear(inputDay);
+        storedday.print();
 	}
 			
 	
