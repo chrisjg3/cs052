@@ -1,0 +1,4 @@
+Name, Tenure, Tier, Points,
+John Doe, 2, ,,
+Bob Gold, 5,A,  ,
+Jane Plat, 5,A,550,

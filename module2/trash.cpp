@@ -1,134 +1,115 @@
-#include <iostream>
+class Essay :public GradedActivity
 
-using namespace std;
-
-class DayOfYear {
+{
 private:
-	string month;
-	int dayOfMonth, dayOfYear;
+double grammar_Score,spelling_Score,length_Score,content_Score;
+
+	
 public:
-	DayOfYear(string, int);
-	DayOfYear(int);
-	void print();
-DayOfYear operator++() {
-	dayOfYear += 1;
-	if (dayOfYear > 365) {
-		dayOfYear -= 365;
-	}
-    return *this;
+double getgrammar_Score()const
+
+{
+return grammar_Score;
 }
-DayOfYear operator--() {
-	dayOfYear -= 1;
-	if (dayOfYear < 0) {
-		dayOfYear += 365;
-	}
-    return *this;
+
+ 
+
+void setgrammar_Score(double s)
+
+{
+grammar_Score = s; 
 }
-DayOfYear operator++(int) {
-	dayOfYear += 1;
-    DayOfYear temp = *this;
-	if (dayOfYear > 365) {
-		dayOfYear -= 365;
-	}
-    return temp;
+
+ 
+
+double getspelling_Score()const
+
+{
+return spelling_Score;
 }
-DayOfYear operator--(int) {
-	dayOfYear -= 1;
-    DayOfYear temp = *this;
-	if (dayOfYear < 0) {
-		dayOfYear += 365;
-	}
-    return temp;
+
+ 
+
+void setspelling_Score(double s)
+{
+spelling_Score = s;
 }
+	
+double getlength_Score()const
+
+{
+return length_Score; 
+
+}
+	
+	
+	
+void setlength_Score(double s)
+
+{ 
+
+length_Score = s;
+
+}
+double getcontent_Score()const
+{
+return content_Score; 
+
+}
+
+ 
+
+void setcontent_Score(double s)
+
+{
+content_Score = s;
+}
+
+
+char getGrade()
+{
+double score = grammar_Score + spelling_Score + length_Score + content_Score;
+
+	
+
+GradedActivity::setScore(score);
+ 
+char grade = getLetterGrade();
+
+return grade;
+}
+ 
+
 };
 
 
 
 
-
-DayOfYear::DayOfYear(int day) {
-	dayOfYear = day;
-	if (dayOfYear <= 31) {
-		month = "January";
-		dayOfMonth = day;
-	}
-	else if (dayOfYear > 31 && dayOfYear <= 59) {
-		month = "February";
-		dayOfMonth = day - 31;
-	}
-	else if (dayOfYear > 59 && dayOfYear <= 90) {
-		month = "March";
-		dayOfMonth = day - 59;
-	}
-	else if (dayOfYear > 90 && dayOfYear <= 120) {
-		month = "April";
-		dayOfMonth = day - 90;
-	}
-	else if (dayOfYear > 120 && dayOfYear <= 151) {
-		month = "May";
-		dayOfMonth = day - 120;
-	}
-	else if (dayOfYear > 151 && dayOfYear <= 181) {
-		month = "June";
-		dayOfMonth = day - 151;
-	}
-	else if (dayOfYear > 181 && dayOfYear <= 212) {
-		month = "July";
-		dayOfMonth = day - 181;
-	}
-	else if (dayOfYear > 212 && dayOfYear <= 243) {
-		month = "August";
-		dayOfMonth = day - 212;
-	}
-	else if (dayOfYear > 243 && dayOfYear <= 273) {
-		month = "September";
-		dayOfMonth = day - 243;
-	}
-	else if (dayOfYear > 273 && dayOfYear <= 304) {
-		month = "October";
-		dayOfMonth = day - 273;
-	}
-	else if (dayOfYear > 304 && dayOfYear <= 334) {
-		month = "November";
-		dayOfMonth = day - 304;
-	}
-	else if (dayOfYear > 334 && dayOfYear <= 365) {
-		month = "December";
-		dayOfMonth = day - 31;
-	}
-}
-DayOfYear::DayOfYear(string month, int day) {
-	this->month = month;
-	dayOfMonth = day;
-}
-
-void DayOfYear::print() {
-	cout << "Day " << dayOfYear << " would be " << month << " " << dayOfMonth << "." << endl;
-}
-
-
-
-using namespace std;
-
 int main()
 {
-	int inputDay;
-	cout<<"Using the first constructor that only requires the day of the year (1-365).\n";
+	int answerInput;
 	
-	cout<<"Enter the a day of the year or a number <=0 to end:";
-	cin>>inputDay;
+cout<<"Enter points received for grammar:\n";
+	cin>>answerInput;
+	setgrammar_Score(answerInput);
 	
-	if(inputDay > 365 || inputDay < 0)
-	{
-		cout<<"Program terminating: The day entered is >365.\n";
-	}
+cout<<"Enter points received for spelling:\n";
+	cin>>answerInput;
+	getspelling_Score(answerInput);
 	
-	else
-	{
-		DayOfYear storedday = DayOfYear(inputDay);
-        storedday.print();
-	}
-			
+cout<<"Enter points received for correct·length:\n";
+	cin>>answerInput;
+	getlength_Score(answerInput);
 	
-	return 0;
+	
+cout<<"Enter points received for content:\n";
+	cin>>answerInput;
+	setcontent_Score(answerInput);
+	
+cout<<"Numeric Grade: "<<getScore()<<endl;
+	
+	
+cout<<"Letter Grade: "<<getGrade()<<endl;
+	
+return 0;	
 }
