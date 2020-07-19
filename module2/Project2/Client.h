@@ -28,7 +28,7 @@ class Client
     string getName() { return name; }
     short getTenure() { return tenure; }
 
-    // Abstract data function (might keep as = 0, idk)
+    // Abstract data function
     virtual ostream& htmlToStream (ostream &) = 0;
 
     friend ostream& operator<<(ostream&out, Client *cl);

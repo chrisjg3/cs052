@@ -16,31 +16,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Things for Video:
-    Did I create Memory Leak?
-    Data Validation with space
-*/
-
-
 /*
 ---------- TO DO LIST: ----------
 1. Add Default COnstructor and Destructors to all Classes
@@ -52,6 +27,7 @@ Things for Video:
 7. Review PDF and Rubrick and Double Check everything works as intended
 8. Data vlidation might be wrong, what if there is a space before next input?
 9. Add line that singles what line the error was on
+10. Only need to build a destructor in ClientList?  I think so
 
 */
 

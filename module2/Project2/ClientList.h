@@ -24,6 +24,7 @@ class ClientList: public vector<Client*>
 
     void consoleInput();
 
+    ~ClientList();
 
     friend ostream &operator<<(ostream &out, ClientList &cl);
 };

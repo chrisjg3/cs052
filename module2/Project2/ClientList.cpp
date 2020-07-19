@@ -1,6 +1,18 @@
 #include "ClientList.h"
 
 
+// ClientList Destructor to free dynamically allocated memory
+ClientList::~ClientList()
+{
+        for(int i = 0; i<this->size(); i++)
+        {
+            Client* tempPtr = this->at(i);
+            delete tempPtr;     
+        }
+}
+
+
+
 
 void ClientList::inputFile(string inputFile)
 {
@@ -200,9 +212,42 @@ ostream &operator<<(ostream &out, ClientList &cl)
     return out;
 }
 
-
 void ClientList::consoleInput()
 {
+    // Controls While loop is at end it can be set to false to exit
+    bool consoleActive = true;
+    // Holds the console choices for different prompts.
+    char consoleChoice;
+    // To simplify things, I use bools to determine which client is being entered
+    // This allows me to use one single block to input clients that exits early
+    // depending on which client type is entered.
+    bool goldBool = false;
+    bool plantinumBool = false;
 
-    // BEGIN HERE --------------------
+    while(consoleActive)
+    {
+        cout<<"\nPlease Select Type of Client To Enter\n";
+        cout<<"1. SilverClient\n";
+        cout<<"2. GoldClient\n";
+        cout<<"3. PlatinumClient\n";
+
+        cin>>consoleChoice;
+        // Determines which client type this will
+        if(consoleChoice == '1') { /* Nothing is Done Since Both Bools Set to False by Default */ }
+        else if (consoleChoice == '2') { goldBool = true; }
+        else if (consoleChoice == '3') { plantinumBool = true; }
+        else 
+        { 
+            cout<<"Error, invalid";
+            continue;  
+        }
+
+        
+
+
+        // Reset the client bools to default
+        goldBool = false;
+        plantinumBool = false;
+
+    }
 }
