@@ -221,8 +221,8 @@ void ClientList::consoleInput()
     // To simplify things, I use bools to determine which client is being entered
     // This allows me to use one single block to input clients that exits early
     // depending on which client type is entered.
-    bool goldBool = false;
-    bool plantinumBool = false;
+    bool goldBool;
+    bool plantinumBool;
     string lineTrash;
 
     getline(cin, lineTrash); // Clearing Buffer
@@ -236,9 +236,14 @@ void ClientList::consoleInput()
 
         cin>>consoleChoice;
         // Determines which client type this will
-        if(consoleChoice == '1') { /* Nothing is Done Since Both Bools Set to False by Default */ }
-        else if (consoleChoice == '2') { goldBool = true; }
-        else if (consoleChoice == '3') { plantinumBool = true; }
+        if(consoleChoice == '1') 
+        { 
+        // Reset the client bools to default
+        goldBool = false;
+        plantinumBool = false; 
+        }
+        else if (consoleChoice == '2') { goldBool = true; plantinumBool = false; } // Makes sure to set plantinum to false
+        else if (consoleChoice == '3') { plantinumBool = true; goldBool = false;  } // Makes sure to set gold to false
         else 
         { 
             cout<<"Error, invalid";
@@ -298,7 +303,6 @@ void ClientList::consoleInput()
         cout<<"\n";
         // If this is reached, name was verified
 
-        getline(cin, lineTrash);
         cin.clear(); // Clears previous '/n' from choices
 
         // Next the program asks for and verfifies Tenure
@@ -316,7 +320,6 @@ void ClientList::consoleInput()
         // Now if the client is silver it needs to exit, so we will have
         // a conditional to push the ClientList if it is silver
 
-        getline(cin, lineTrash);
         cin.clear(); // Clears previous '/n' from choices
 
         if(!goldBool && !plantinumBool)
@@ -352,7 +355,6 @@ void ClientList::consoleInput()
             cin>>tierInput;
         }
 
-        getline(cin, lineTrash);
         cin.clear(); // Clears previous '/n' from choices
 
         // This is reached once teir is validated
@@ -381,7 +383,6 @@ void ClientList::consoleInput()
         // If the code reaches here, then the client must be platinum, so
         // We just verify the data and then push it to the list
 
-        getline(cin, lineTrash);
         cin.clear(); // Clears previous '/n' from choices
 
         cout<<"\nEnter Platinum Points: (Between 0 and 100,000) \n";
@@ -414,9 +415,7 @@ void ClientList::consoleInput()
                 continue;
                  }
 
-        // Reset the client bools to default
-        goldBool = false;
-        plantinumBool = false;
-
     }
+    // Print the HTML Table to console
+    cout<<*this;
 }

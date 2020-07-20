@@ -30,7 +30,7 @@
 10. Only need to build a destructor in ClientList?  I think so
 11. Make the bools for console silver and gold to make it clearer
 12. Client viretual destrcutor issue, either write in all of them or do something idk
-13. Go through code and clean up any extra cin.clear()s or anything unnecessary
+13. Go through code and clean up.  Need cin.clears?  Its the many inputs that were the problem...so clears not needed?
 
 */
 
