@@ -28,7 +28,7 @@ int main()
         }
         else if (choice == '2')
         {
-            // Whatever Option 2 is
+            cl.consoleInput();
         }
         else if (choice == '3')
         {

@@ -21,8 +21,9 @@ class Client
     //Default Contrustor
     Client();
 
-    //Destructor
-    ~Client();
+    // Destructor
+    // Virtual to avoid warnings since this is an abstract class
+    virtual ~Client();
 
     // Get (Accessor) Functions
     string getName() { return name; }

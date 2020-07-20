@@ -28,6 +28,9 @@
 8. Data vlidation might be wrong, what if there is a space before next input?
 9. Add line that singles what line the error was on
 10. Only need to build a destructor in ClientList?  I think so
+11. Make the bools for console silver and gold to make it clearer
+12. Client viretual destrcutor issue, either write in all of them or do something idk
+13. Go through code and clean up any extra cin.clear()s or anything unnecessary
 
 */
 

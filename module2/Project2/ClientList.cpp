@@ -223,7 +223,10 @@ void ClientList::consoleInput()
     // depending on which client type is entered.
     bool goldBool = false;
     bool plantinumBool = false;
+    string lineTrash;
 
+    getline(cin, lineTrash); // Clearing Buffer
+    cin.clear();
     while(consoleActive)
     {
         cout<<"\nPlease Select Type of Client To Enter\n";
@@ -241,9 +244,175 @@ void ClientList::consoleInput()
             cout<<"Error, invalid";
             continue;  
         }
+        getline(cin, lineTrash);
+        cin.clear(); // Clears previous '/n' from choices
 
+        // Here are the local variables used for console verification and creating the different Client objects.
+        string inputName;
+        int spaceCount;
+        bool isError;
+        short tenureInput;
+        char tierInput;
+        float pointsInput;
+
+        do 
+        {
+            isError = false;
+            // Name Input
+            cout<<"\n\nInput Name of Client:\n";
+            getline(cin, inputName);
+            spaceCount = 0; // Resetting for each new inputted name
+
+            // Name Verification
+            for(int i = 0; i<inputName.size(); i++)
+                {
+                    // This counts if each character is a space to check the number of names entered
+                    if(inputName[i] == ' ')
+                    {
+                        spaceCount++;
+                    }
+
+                    // This checks if the character is a hypthen, which is not allowed
+                    if(inputName[i] == '-')
+                    {   
+                        // If hyphen detected, error dispalyed and isError set to true
+                        // Then break leaves for loop since no need to check the rest of the word
+                        cout<<"Error, no hyphens allowed."<<endl;
+                        isError = true;
+                        break;
+                    }
+
+                    // This is checks after each character if there have been too many spaces
+                    // (And therefore too many names)
+                    if(spaceCount > 3)
+                    {
+                        // This is reached if too many names entered
+                        // If hyphen detected, error dispalyed and isError set to true
+                        // Then break leaves for loop since no need to check the rest of the word
+                        cout<<"Error, too many names"<<endl;
+                        isError = true;
+                        break;
+                    }
+                }
+        } while(isError);
+        cout<<"\n";
+        // If this is reached, name was verified
+
+        getline(cin, lineTrash);
+        cin.clear(); // Clears previous '/n' from choices
+
+        // Next the program asks for and verfifies Tenure
+        cout<<"Please enter the tenure of the client: \n (Between 0 and 100) \n";
+        cin>>tenureInput;
+
+        while(tenureInput < 0 || tenureInput > 100)
+        {
+            cout<<"Error, please enter a valid input.\n";
+            cin.clear(); // Clears previous '/n' from choices
+            cin>>tenureInput;
+        }
         
+        // If code reached here then both name and tenure are valid.
+        // Now if the client is silver it needs to exit, so we will have
+        // a conditional to push the ClientList if it is silver
 
+        getline(cin, lineTrash);
+        cin.clear(); // Clears previous '/n' from choices
+
+        if(!goldBool && !plantinumBool)
+        {
+            // Create the client pointer and push it to the ClientList
+            Client* newcl =  new SilverClient(tenureInput, inputName);
+            this->push_back(newcl);
+
+            // Then we have to ask if the user wants to add another before restarting
+            cout<<"\n Would you like to...?";
+            cout<<"\n1. Add Another Client?";
+            cout<<"\n2. Return to Menu?";
+            cin>>consoleChoice;
+            if (consoleChoice == '1') { continue; }
+            else if (consoleChoice == '2') { consoleActive = false; continue;}
+            else {
+                cout<<"Invalid Choice, sending back to menu! \n "; 
+                consoleActive = false; 
+                continue;
+                }
+        }
+
+        // So if it reaches here, then the client is either a Gold or PLantinum Client
+
+
+        cout<<"Please enter the tier of the client: \n (Please Enter Lowercase) \n";
+        cin>>tierInput;
+
+        while(tierInput < 'a' || tierInput > 'z')
+        {
+            cout<<"Error, please enter a valid input.\n";
+            cout<<"(Please Enter Lowercase)\n";
+            cin>>tierInput;
+        }
+
+        getline(cin, lineTrash);
+        cin.clear(); // Clears previous '/n' from choices
+
+        // This is reached once teir is validated
+        // Next, we check if this is a gold client
+        // And if it is we push to ClientList and restart the loop again
+        if(goldBool)
+        {
+            // Create the client pointer and push it to the ClientList
+            Client* newcl =  new GoldClient(tenureInput, inputName, tierInput);
+            this->push_back(newcl);
+
+            // Then we have to ask if the user wants to add another before restarting
+            cout<<"\n Would you like to...?";
+            cout<<"\n1. Add Another Client?";
+            cout<<"\n2. Return to Menu?";
+            cin>>consoleChoice;
+            if (consoleChoice == '1') { continue; }
+            else if (consoleChoice == '2') { consoleActive = false; continue;}
+            else {
+                cout<<"Invalid Choice, sending back to menu! \n "; 
+                consoleActive = false; 
+                continue;
+                }
+        }
+        
+        // If the code reaches here, then the client must be platinum, so
+        // We just verify the data and then push it to the list
+
+        getline(cin, lineTrash);
+        cin.clear(); // Clears previous '/n' from choices
+
+        cout<<"\nEnter Platinum Points: (Between 0 and 100,000) \n";
+        cin>>pointsInput;
+
+        while(pointsInput < 0 || pointsInput > 100000)
+        {
+            cout<<"Error, enter valid number (Between 0 and 100,000) \n";
+            cin.clear(); // Clears previous '/n' from choices
+            cin>>pointsInput;
+        }
+        // Push this new client to the list
+        Client* newcl =  new PlatinumClient(tenureInput, inputName, tierInput, pointsInput);
+        this->push_back(newcl);
+
+        getline(cin, lineTrash);
+        cin.clear(); // Clears previous '/n' from choices
+
+        // Ask if they want to add another client
+        cout<<"\n Would you like to...?";
+            cout<<"\n1. Add Another Client?";
+            cout<<"\n2. Return to Menu?";
+            cin.clear(); // Clears previous '/n' from choices
+            cin>>consoleChoice;
+            if (consoleChoice == '1') { continue; }
+            else if (consoleChoice == '2') { consoleActive = false; continue;}
+            else {
+                cout<<"Invalid Choice, sending back to menu! \n "; 
+                consoleActive = false; 
+                continue;
+                 }
 
         // Reset the client bools to default
         goldBool = false;
