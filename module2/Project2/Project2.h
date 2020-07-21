@@ -1,3 +1,23 @@
+/*
+* Project2.h
+*
+* COSC 052 2020
+* Project 2
+*
+* Due on: July 21st
+* Author: Christopher Gallo
+*
+*
+* In accordance with the class policies and Georgetown's
+* Honor Code, I certify that, with the exception of the
+* class resources and those items noted below, I have neither
+* given nor received any assistance on this project.
+*
+* References not otherwise commented within the program source code.
+* Note that you should not mention any help from the TAs, the professor,
+* or any code taken from the class textbooks.
+*/
+
 #ifndef PROJECT2_H
 #define PROJECT2_H
 
@@ -18,19 +38,41 @@
 
 /*
 ---------- TO DO LIST: ----------
-1. Add Default COnstructor and Destructors to all Classes
-2. Need to add those data validations you skipped
-3. Need to add console read
-4. Clean up that verification for tier, don't need to be that messy
-5. Put in Honor Code Statement
-6. Is "return out" correct?
-7. Review PDF and Rubrick and Double Check everything works as intended
+
+
+---------- OH Qs:
 8. Data vlidation might be wrong, what if there is a space before next input?
-9. Add line that singles what line the error was on
 10. Only need to build a destructor in ClientList?  I think so
-11. Make the bools for console silver and gold to make it clearer
-12. Client viretual destrcutor issue, either write in all of them or do something idk
+12. Client viretual destrcutor issue, either write in all of them or do something idk, 14. Do we need constructors and destructors for each class?  It can all inherit Clients and be fine I believe
+17. Should it display first then promot for new Client?  PDF seems to imply that
+
+
+----
+
+
+
+
+4. Clean up that verification for tier, don't need to be that messy
+
+
 13. Go through code and clean up.  Need cin.clears?  Its the many inputs that were the problem...so clears not needed?
+
+
+
+
+
+
+---------- LAST THINGS TO DO:
+19. Test on course server
+7. Review PDF and Rubrick and Double Check everything works as intended
+Delete this list
+
+
+
+---------- If You Have Time:
+11. Make the bools for console silver and gold to make it clearer
+
+
 
 */
 

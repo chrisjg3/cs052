@@ -1,17 +1,62 @@
+/*
+* ClientList.cpp
+*
+* COSC 052 2020
+* Project 2
+*
+* Due on: July 21st
+* Author: Christopher Gallo
+*
+*
+* In accordance with the class policies and Georgetown's
+* Honor Code, I certify that, with the exception of the
+* class resources and those items noted below, I have neither
+* given nor received any assistance on this project.
+*
+* References not otherwise commented within the program source code.
+* Note that you should not mention any help from the TAs, the professor,
+* or any code taken from the class textbooks.
+*/ 
+
 #include "ClientList.h"
 
 
 // ClientList Destructor to free dynamically allocated memory
 ClientList::~ClientList()
 {
-        for(int i = 0; i<this->size(); i++)
-        {
-            Client* tempPtr = this->at(i);
-            delete tempPtr;     
-        }
+    for(int i = 0; i<this->size(); i++)
+    {
+        Client* tempPtr = this->at(i);
+        delete tempPtr;     
+    }
 }
 
+// Function to build the output file
+void ClientList::saveToFile()
+{
+    // Opens a file to write to
+    ofstream outputFile;
+    outputFile.open("output.txt");
 
+    // First line of html table
+    outputFile<<"table border = '1'> \n";
+    outputFile<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
+
+// Create a loop to add each Client
+    for(unsigned short i = 0; i<this->size(); i++)
+    {
+        // We use the htmlToStream function, an ofstream and be passed into a ostream function
+        // So this is a ofstream passed to htmlToStream expecting an ostream, but the libraries can handle this
+        this->at(i)->htmlToStream(outputFile);
+        // Once Client Object done printing, line is closed and new row is ready:
+        outputFile<< " </td></tr> \n";
+    }
+
+    // Ending table
+    outputFile<<"</table>";
+    // File Closed
+    outputFile.close();
+}
 
 
 void ClientList::inputFile(string inputFile)
@@ -64,7 +109,7 @@ void ClientList::inputFile(string inputFile)
             {
                 // If hyphen is found, code will display error the mark isError true
                 // And exit the for loop, as the name is not valid so will stop being read
-                cout<<"Error on line "<<rowCounter<<", no hyphens allowed."<<endl;
+                cout<<"Error on line "<<rowCounter<<", no hyphens allowed.\n"<<endl;
                 isError = true;
                 break;
             }
@@ -75,7 +120,7 @@ void ClientList::inputFile(string inputFile)
             {
                 // If more than allowed names (signified by too many spaces) is found
                 // code displays error, marks isError true, then exits the for loop. 
-                cout<<"Error on line "<<rowCounter<<", too many names"<<endl;
+                cout<<"Error on line "<<rowCounter<<", too many names\n"<<endl;
                 isError = true;
                 break;
             }
@@ -95,6 +140,16 @@ void ClientList::inputFile(string inputFile)
         // NOTE: STILL NEED VERIFICATION BUILT --------------------------------------------
 
         ClientFile>>inputTenure;
+
+        if(inputTenure < 0 || inputTenure > 100)
+        {
+            // Reaches here if the tenure data entered is not valid.
+            cout<<"Error on line "<<rowCounter<<", outside of range. Moving to next line...\n";
+            // Trashes the rest of the line:
+            getline(ClientFile, linetrash);
+            // Returns to the start of the loop
+            continue;
+        }
 
         // For now, assuming always valid  --------------------------------------------
 
@@ -125,6 +180,7 @@ void ClientList::inputFile(string inputFile)
             {
                 // If it isn't in the valid range then trash the line and restart again
                 getline(ClientFile, linetrash);
+                cout<<"\nError, Tier on row "<<rowCounter<<"is not an acceaptable character.  Moving to next row...\n";
                 continue;
             }
             // NOTE: Remember, once it is verified we don't add it to the ClientList yet,
@@ -154,7 +210,15 @@ void ClientList::inputFile(string inputFile)
 
             ClientFile>>inputPoints;
 
-            // NEED TO ADD DATA VALIDATION HERE -----------------------------------------
+            if(inputPoints < 0 || inputPoints > 100000)
+            {
+                // Reach this line if Points in that row is not valid
+                cout<<"Error on line "<<rowCounter<<", moving to next row...\n";
+                // Trashes the rest of the line
+                getline(ClientFile, linetrash);
+                // Returns to start of the loop
+                continue;
+            }
 
         }
         else
@@ -184,10 +248,12 @@ void ClientList::inputFile(string inputFile)
     // Close File
     ClientFile.close();
 
-    // Print HTML Table
+    // Print HTML Table to Console
+    cout<<"\n\n";
     cout<<*this;
 
-    // ostream here ------------------------------------------------
+    // Save HTML Table to output.txt
+    this->saveToFile();
 }
 
 
@@ -331,7 +397,7 @@ void ClientList::consoleInput()
             // Then we have to ask if the user wants to add another before restarting
             cout<<"\n Would you like to...?";
             cout<<"\n1. Add Another Client?";
-            cout<<"\n2. Return to Menu?";
+            cout<<"\n2. Return to Menu?\n";
             cin>>consoleChoice;
             if (consoleChoice == '1') { continue; }
             else if (consoleChoice == '2') { consoleActive = false; continue;}
@@ -369,7 +435,7 @@ void ClientList::consoleInput()
             // Then we have to ask if the user wants to add another before restarting
             cout<<"\n Would you like to...?";
             cout<<"\n1. Add Another Client?";
-            cout<<"\n2. Return to Menu?";
+            cout<<"\n2. Return to Menu?\n";
             cin>>consoleChoice;
             if (consoleChoice == '1') { continue; }
             else if (consoleChoice == '2') { consoleActive = false; continue;}
@@ -404,7 +470,7 @@ void ClientList::consoleInput()
         // Ask if they want to add another client
         cout<<"\n Would you like to...?";
             cout<<"\n1. Add Another Client?";
-            cout<<"\n2. Return to Menu?";
+            cout<<"\n2. Return to Menu?\n";
             cin.clear(); // Clears previous '/n' from choices
             cin>>consoleChoice;
             if (consoleChoice == '1') { continue; }
@@ -418,4 +484,5 @@ void ClientList::consoleInput()
     }
     // Print the HTML Table to console
     cout<<*this;
+    this->saveToFile();
 }
