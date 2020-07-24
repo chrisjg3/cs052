@@ -20,6 +20,8 @@
 
 #include "GoldClient.h"
 
+
+// ostream for GoldClients
 ostream& GoldClient::htmlToStream(ostream &out)
 {
     out<<"\t <tr> <td> " << this->getName();

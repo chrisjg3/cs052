@@ -21,16 +21,16 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-
 #include <iostream>
 
 using namespace std;
 
 class Client
 {
+    // Protected Variables that are in all Dervied Client Objects
     protected:
     string name;
-    short tenure;  // NOTE: SAYS SHORT BUT SHOULD HANDLE FLOATS, SO EITHER ROUND OR MAKE FLOAT VARIABLE
+    short tenure; 
     int rewardsPoints;
     
 
@@ -42,7 +42,7 @@ class Client
     Client();
 
     // Destructor
-    // Virtual to avoid warnings since this is an abstract class and has no instances
+    // Since delete is called (on Client Pointers), virtual is needed to avoid warning.
     virtual ~Client();
 
     // Get (Accessor) Functions

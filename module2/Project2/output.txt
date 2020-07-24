@@ -1,5 +1,0 @@
-table border = '1'> 
-	 <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> 
-	 <tr> <td> Jane Plat </td> <td> 5 </td> <td> a </td> <td> 550 </td></tr> 
-	 <tr> <td> Perfect </td> <td> 12 </td> <td> c </td> <td> 200 </td></tr> 
-</table>

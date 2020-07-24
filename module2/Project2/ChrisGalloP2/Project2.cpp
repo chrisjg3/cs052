@@ -39,20 +39,19 @@ int main()
         choice = displayMenu();
 
         // Determine what to run based on choice
-        if (choice == '1')
+        if (choice == '1') // File Input
         {
             cout<<"Please enter the file name: \n";
             string fileName;
             cin>>fileName;
             cl.inputFile(fileName);
         }
-        else if (choice == '2')
+        else if (choice == '2') // Console Input
         {
             cl.consoleInput();
         }
-        else if (choice == '3')
+        else if (choice == '3') // Exitting
         {
-            // Exit Option Here:
             cout<<"Exiting..."<<endl;
             menuActive = false;
         }

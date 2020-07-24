@@ -1,7 +1,0 @@
-Name, Tenure, Tier, Points,
-Jane Plat, 5,A,550,
-J J J J J, 10,A,130,
-Mike Moo,1111,B,10,
-Jain johnson,120,0,11,
-Abe Lincoln, 110,A,200000,
-Perfect, 12,C,200,

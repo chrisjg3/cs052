@@ -1,5 +1,5 @@
 /*
-* Client.cpp
+* SilverClient.cpp
 *
 * COSC 052 2020
 * Project 2
@@ -18,32 +18,12 @@
 * or any code taken from the class textbooks.
 */ 
 
-#include "Client.h"
+#include "SilverClient.h"
 
-Client::Client(short ten, string nam)
+// ostream for silver client
+ostream& SilverClient::htmlToStream(ostream &out)
 {
-    tenure = ten;
-    name = nam;
-}
-
-
-
-
-ostream& operator<<(ostream&out, Client *cl)
-{
-    // Totally overridden by each derived class
-}
-
-
-
-
-Client::Client()
-{
-    // Default Constructor
-}
-
-
-Client::~Client()
-{
-    // Default Destrcutor
+    out<<"\t <tr> <td> " << this->getName();
+    out<< " </td> <td> " << this->getTenure();
+    return out;
 }

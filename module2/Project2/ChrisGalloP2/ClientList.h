@@ -36,7 +36,7 @@
 using namespace std;
 
 // ClientList Class
-class ClientList: public vector<Client*>
+class ClientList
 {
     public:
 
@@ -46,6 +46,7 @@ class ClientList: public vector<Client*>
     // This is used to call the function for inputting from console
     void consoleInput();
 
+    // This is the destrcutor, used to free dynamically allocated memory
     ~ClientList();
 
     // Function to save the HTML Table to a file
@@ -53,6 +54,10 @@ class ClientList: public vector<Client*>
 
     // This is for printing each Client ponter's Client Obj to console
     friend ostream &operator<<(ostream &out, ClientList &cl);
+
+    // This is the vector that is used to store Client pointers to the different clients
+    private:
+    vector<Client*>vl;
 };
 
 

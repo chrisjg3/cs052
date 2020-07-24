@@ -31,13 +31,11 @@ class SilverClient:public Client
     // Main Constructor
     SilverClient(short tenure, string name): Client(tenure, name)
     {
-        // Does Nothing Else??? ---------------------------------------------------
+       
     }
 
-
-    virtual ostream& htmlToStream(ostream &out);
-
-
+    // stream to HTML 
+    ostream& htmlToStream(ostream &out);
 };
 
 #endif

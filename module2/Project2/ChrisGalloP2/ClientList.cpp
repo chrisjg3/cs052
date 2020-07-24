@@ -24,9 +24,11 @@
 // ClientList Destructor to free dynamically allocated memory
 ClientList::~ClientList()
 {
-    for(int i = 0; i<this->size(); i++)
+    // This function frees the dynamically allocated memory after the vector is done being used
+    for(int i = 0; i<vl.size(); i++)
     {
-        Client* tempPtr = this->at(i);
+        // Creates dynamic pointer that is assigned each client pointer, then freed
+        Client* tempPtr = vl.at(i);
         delete tempPtr;     
     }
 }
@@ -42,12 +44,12 @@ void ClientList::saveToFile()
     outputFile<<"table border = '1'> \n";
     outputFile<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
 
-// Create a loop to add each Client
-    for(unsigned short i = 0; i<this->size(); i++)
+    // Create a loop to add each Client
+    for(unsigned short i = 0; i<vl.size(); i++)
     {
         // We use the htmlToStream function, an ofstream and be passed into a ostream function
         // So this is a ofstream passed to htmlToStream expecting an ostream, but the libraries can handle this
-        this->at(i)->htmlToStream(outputFile);
+        vl.at(i)->htmlToStream(outputFile);
         // Once Client Object done printing, line is closed and new row is ready:
         outputFile<< " </td></tr> \n";
     }
@@ -66,7 +68,7 @@ void ClientList::inputFile(string inputFile)
     short inputTenure;
     string inputTier;
     char tierVerified;
-    short inputPoints;
+    float inputPoints;
     string linetrash;
 
     // Variables for input and output streams:
@@ -77,7 +79,8 @@ void ClientList::inputFile(string inputFile)
 
     // Attempt to open file here:
     ClientFile.open(inputFile.c_str());
-    if (!(ClientFile)) {
+    if (!(ClientFile)) 
+    {
         // Error displayed and returned to menu if no file found
         cout<<"\nError, No File Found."<<"\n\n";
         return;
@@ -136,9 +139,7 @@ void ClientList::inputFile(string inputFile)
         }
 
 
-        // Tenure Verification
-        // NOTE: STILL NEED VERIFICATION BUILT --------------------------------------------
-
+        // Tenure Read-in and Verification
         ClientFile>>inputTenure;
 
         if(inputTenure < 0 || inputTenure > 100)
@@ -151,19 +152,25 @@ void ClientList::inputFile(string inputFile)
             continue;
         }
 
-        // For now, assuming always valid  --------------------------------------------
 
 
-
-        // Begins Optional Section, so must check next two attributes exist, then verify, then add
+        // At this point, next sections are optional, so the program must check next two 
+        // attributes exist, then verify, then add.
 
         // First Trash the comma that is next
         ClientFile.get();
 
+        // Next we have to check if the next character is a space, so we can move over if it is, before
+        // checking if there is a comma or another input.
+        if(ClientFile.peek() == ' ')
+        {
+            ClientFile.get();
+        }
+
         // Now peek to see if next column has a value, or if this Client has no more information.
-        // So this if/else checks if the next character is a space or comma, if not then read in the input
+        // So this if/else checks if the next character is a comma, if not then read in the input
         // otherwise, this row has no more info and so the else clears the line 
-        if(ClientFile.peek() != ' ' && ClientFile.peek() != ',')
+        if(ClientFile.peek() != ',')
         {
             // This gets the next part up to the comma
             getline(ClientFile,inputTier, ',');
@@ -185,25 +192,32 @@ void ClientList::inputFile(string inputFile)
             }
             // NOTE: Remember, once it is verified we don't add it to the ClientList yet,
             // we only add them once we reach the input it doesn't have or it is add the end of the list
-            // At that point, we then build it because we know there is nothing else to add.
+            // So if reached here, the Tier was valid, but we must move to points to see if it is Gold or Platinum
         }
-        else
+        else 
         {
-            // This is reached if the line is now over, indicated by no more information.
-            // First, trash the rest of the line
+            // This is reached if tier had no input and so this input was a SilverClient.
+            // First, trash the rest of the line (since it is only commas)
             getline(ClientFile, linetrash);
 
             // Now push the rest of the information and create a Client Pointer, pointing 
             // to a SilverClient Obj.  Then push that pointer into the vector:
             Client* clientptr =  new SilverClient(inputTenure, inputName);
-            this->push_back(clientptr); // Adding to Vector
+            vl.push_back(clientptr); // Adding to Vector
 
             // Now that it is added and line is trashed, we must restart from the beginning
             continue;
         }
 
+        // Next we have to check if the next character is a space, so we can move over if it is, before
+        // checking if there is a comma or another input.
+        if(ClientFile.peek() == ' ')
+        {
+            ClientFile.get();
+        }
+
         // Next we check if there is the last input, PlatinumPoints, or if this row has no more info:
-        if(ClientFile.peek() != ' ' && ClientFile.peek() != ',')
+        if(ClientFile.peek() != ',')
         {
             // If the code is here, then the the next column is not blank
             // We read this in rather then use getline, because it is a number and so this makes it simplier.
@@ -228,18 +242,17 @@ void ClientList::inputFile(string inputFile)
 
             Client* clientptr = new GoldClient(inputTenure, inputName, tierVerified);
             // Once new pointer to dynamically allocated memory created, add it to the ClientList:
-            this->push_back(clientptr);
+            vl.push_back(clientptr);
             getline(ClientFile, linetrash);
             continue;
 
         }
-
         // If code reaches here, then it has to be a platinum client as all others would have
         // fallen into one of those else blocks and been added to the ClientList already.
 
         Client* clientptr = new PlatinumClient(inputTenure, inputName, tierVerified, inputPoints);
         // Once new pointer to dynamically allocated memory created, add it to the ClientList:
-        this->push_back(clientptr);
+        vl.push_back(clientptr);
 
         // Once loaded in, need to trash the last comma and restart for the next line
         getline(ClientFile, linetrash);
@@ -265,10 +278,10 @@ ostream &operator<<(ostream &out, ClientList &cl)
     out<<"table border = '1'> \n";
     out<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
 
-    // Enter loop to add Students
-    for(unsigned short i = 0; i<cl.size(); i++)
+    // Enter loop to add Students (cl is the CientList, and vl is the vector inside it)
+    for(unsigned short i = 0; i<cl.vl.size(); i++)
     {
-        cl[i]->htmlToStream(out);
+        cl.vl[i]->htmlToStream(out);
         // Once Client Object done printing, line is closed and new row is ready:
         out<< " </td></tr> \n";
     }
@@ -290,9 +303,9 @@ void ClientList::consoleInput()
     bool goldBool;
     bool plantinumBool;
     string lineTrash;
+    getline(cin, lineTrash); // clearing from issues from any previous input
 
-    getline(cin, lineTrash); // Clearing Buffer
-    cin.clear();
+    // Starting the console loop
     while(consoleActive)
     {
         cout<<"\nPlease Select Type of Client To Enter\n";
@@ -315,8 +328,6 @@ void ClientList::consoleInput()
             cout<<"Error, invalid";
             continue;  
         }
-        getline(cin, lineTrash);
-        cin.clear(); // Clears previous '/n' from choices
 
         // Here are the local variables used for console verification and creating the different Client objects.
         string inputName;
@@ -325,7 +336,10 @@ void ClientList::consoleInput()
         short tenureInput;
         char tierInput;
         float pointsInput;
+        getline(cin, lineTrash); // clearing to avoid any issues w/ previous input
 
+
+        // The do-while loop is used to take the name input and make sure (through a for loop) it is valid
         do 
         {
             isError = false;
@@ -369,8 +383,6 @@ void ClientList::consoleInput()
         cout<<"\n";
         // If this is reached, name was verified
 
-        cin.clear(); // Clears previous '/n' from choices
-
         // Next the program asks for and verfifies Tenure
         cout<<"Please enter the tenure of the client: \n (Between 0 and 100) \n";
         cin>>tenureInput;
@@ -378,50 +390,46 @@ void ClientList::consoleInput()
         while(tenureInput < 0 || tenureInput > 100)
         {
             cout<<"Error, please enter a valid input.\n";
-            cin.clear(); // Clears previous '/n' from choices
             cin>>tenureInput;
         }
         
         // If code reached here then both name and tenure are valid.
         // Now if the client is silver it needs to exit, so we will have
-        // a conditional to push the ClientList if it is silver
-
-        cin.clear(); // Clears previous '/n' from choices
+        // a conditional to push the ClientList if it is silver.
 
         if(!goldBool && !plantinumBool)
         {
             // Create the client pointer and push it to the ClientList
             Client* newcl =  new SilverClient(tenureInput, inputName);
-            this->push_back(newcl);
+            vl.push_back(newcl);
 
             // Then we have to ask if the user wants to add another before restarting
             cout<<"\n Would you like to...?";
             cout<<"\n1. Add Another Client?";
             cout<<"\n2. Return to Menu?\n";
             cin>>consoleChoice;
-            if (consoleChoice == '1') { continue; }
-            else if (consoleChoice == '2') { consoleActive = false; continue;}
+            if (consoleChoice == '1') { continue; } // Sends to top of loop, console still active so runs again
+            else if (consoleChoice == '2') { consoleActive = false; continue;} // sends to loop, but is inactive so leaves loop
             else {
                 cout<<"Invalid Choice, sending back to menu! \n "; 
                 consoleActive = false; 
-                continue;
+                continue; // sends to loop, but is inactive so leaves loop
                 }
         }
 
         // So if it reaches here, then the client is either a Gold or PLantinum Client
 
-
+        // Tier input entry and validation
         cout<<"Please enter the tier of the client: \n (Please Enter Lowercase) \n";
         cin>>tierInput;
 
+        // Re-asks if a valid character was not entered
         while(tierInput < 'a' || tierInput > 'z')
         {
             cout<<"Error, please enter a valid input.\n";
             cout<<"(Please Enter Lowercase)\n";
             cin>>tierInput;
         }
-
-        cin.clear(); // Clears previous '/n' from choices
 
         // This is reached once teir is validated
         // Next, we check if this is a gold client
@@ -430,42 +438,38 @@ void ClientList::consoleInput()
         {
             // Create the client pointer and push it to the ClientList
             Client* newcl =  new GoldClient(tenureInput, inputName, tierInput);
-            this->push_back(newcl);
+            vl.push_back(newcl);
 
             // Then we have to ask if the user wants to add another before restarting
             cout<<"\n Would you like to...?";
             cout<<"\n1. Add Another Client?";
             cout<<"\n2. Return to Menu?\n";
             cin>>consoleChoice;
-            if (consoleChoice == '1') { continue; }
-            else if (consoleChoice == '2') { consoleActive = false; continue;}
+            if (consoleChoice == '1') { continue; } // Sends to top of loop, console still active so runs again
+            else if (consoleChoice == '2') { consoleActive = false; continue;} // sends to loop, but is inactive so leaves loop
             else {
                 cout<<"Invalid Choice, sending back to menu! \n "; 
                 consoleActive = false; 
-                continue;
+                continue; // sends to loop, but is inactive so leaves loop
                 }
         }
         
         // If the code reaches here, then the client must be platinum, so
         // We just verify the data and then push it to the list
 
-        cin.clear(); // Clears previous '/n' from choices
-
+        // Platinum Points entry and validation
         cout<<"\nEnter Platinum Points: (Between 0 and 100,000) \n";
         cin>>pointsInput;
 
         while(pointsInput < 0 || pointsInput > 100000)
         {
             cout<<"Error, enter valid number (Between 0 and 100,000) \n";
-            cin.clear(); // Clears previous '/n' from choices
             cin>>pointsInput;
         }
         // Push this new client to the list
         Client* newcl =  new PlatinumClient(tenureInput, inputName, tierInput, pointsInput);
-        this->push_back(newcl);
+        vl.push_back(newcl);
 
-        getline(cin, lineTrash);
-        cin.clear(); // Clears previous '/n' from choices
 
         // Ask if they want to add another client
         cout<<"\n Would you like to...?";
@@ -473,16 +477,17 @@ void ClientList::consoleInput()
             cout<<"\n2. Return to Menu?\n";
             cin.clear(); // Clears previous '/n' from choices
             cin>>consoleChoice;
-            if (consoleChoice == '1') { continue; }
-            else if (consoleChoice == '2') { consoleActive = false; continue;}
+            if (consoleChoice == '1') { continue; } // Sends to top of loop, console still active so runs again
+            else if (consoleChoice == '2') { consoleActive = false; continue;} // sends to loop, but is inactive so leaves loop
             else {
                 cout<<"Invalid Choice, sending back to menu! \n "; 
                 consoleActive = false; 
-                continue;
-                 }
+                continue; // sends to loop, but is inactive so leaves loop
+                }
 
     }
     // Print the HTML Table to console
     cout<<*this;
+    // Prints to output.txt
     this->saveToFile();
 }

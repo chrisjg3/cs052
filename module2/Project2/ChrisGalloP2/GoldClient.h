@@ -1,5 +1,5 @@
 /*
-* PlatinumClient.h
+* GoldClient.h
 *
 * COSC 052 2020
 * Project 2
@@ -18,38 +18,28 @@
 * or any code taken from the class textbooks.
 */ 
 
-#ifndef PLATINUMCLIENT_H
-#define PLATINUMCLIENT_H
+#ifndef GOLDCLIENT_H
+#define GOLDCLIENT_H
 
 
 #include "Client.h"
 
 
-
-
-class PlatinumClient:public Client
+class GoldClient:public Client
 {
     private:
-    short plantinumPoints;
+    // new attribute for Gold class
     char tier;
 
-    // Public Functions Start Here
     public:
-    short getPoints() { return plantinumPoints; }
+    // Get (Accessor) Function
     char getTier() { return tier; }
 
-    // Constructor
-    PlatinumClient(short tenure, string name, char tier, short plantinumPoints): Client(tenure, name) 
-    { 
-        this->tier = tier;
-        this->plantinumPoints = plantinumPoints;
-    }
+    // The main constructor used by the program
+    GoldClient(short tenure, string name, char tier): Client(tenure, name) { this->tier = tier; }
 
-    // HTML ostream function
+    // ostream function for HTML stream
     ostream& htmlToStream(ostream &out);
-
-    friend ostream& operator<<(ostream&out, Client *cl);
-
 };
 
 #endif

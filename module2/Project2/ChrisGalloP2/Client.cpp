@@ -1,5 +1,5 @@
 /*
-* SilverClient.cpp
+* Client.cpp
 *
 * COSC 052 2020
 * Project 2
@@ -18,11 +18,24 @@
 * or any code taken from the class textbooks.
 */ 
 
-#include "SilverClient.h"
+#include "Client.h"
 
-ostream& SilverClient::htmlToStream(ostream &out)
+// This is the main contructor used in the other derived contructors:
+Client::Client(short ten, string nam)
 {
-    out<<"\t <tr> <td> " << this->getName();
-    out<< " </td> <td> " << this->getTenure();
-    return out;
+    tenure = ten;
+    name = nam;
+}
+
+
+
+Client::Client()
+{
+    // Default Constructor
+}
+
+
+Client::~Client()
+{
+    // Default Destrcutor
 }
