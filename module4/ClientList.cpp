@@ -33,9 +33,10 @@ ClientList::~ClientList()
     }
 }
 
-// Function to build the output file
-void ClientList::saveToFile()
+
+ostream &operator<<(ostream &out, ClientList &cl)
 {
+
     // Opens a file to write to
     ofstream outputFile;
     outputFile.open("output.txt");
@@ -45,11 +46,11 @@ void ClientList::saveToFile()
     outputFile<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
 
     // Create a loop to add each Client
-    for(unsigned short i = 0; i<vl.size(); i++)
+    for(unsigned short i = 0; i<cl.vl.size(); i++)
     {
         // We use the htmlToStream function, an ofstream and be passed into a ostream function
         // So this is a ofstream passed to htmlToStream expecting an ostream, but the libraries can handle this
-        vl.at(i)->htmlToStream(outputFile);
+        cl.vl.at(i)->htmlToStream(outputFile);
         // Once Client Object done printing, line is closed and new row is ready:
         outputFile<< " </td></tr> \n";
     }
@@ -58,7 +59,25 @@ void ClientList::saveToFile()
     outputFile<<"</table>";
     // File Closed
     outputFile.close();
+
+    // Print to Console Starts Here -----------
+    // First line of html table
+    out<<"table border = '1'> \n";
+    out<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
+
+    // Enter loop to add Students (cl is the CientList, and vl is the vector inside it)
+    for(unsigned short i = 0; i<cl.vl.size(); i++)
+    {
+        cl.vl[i]->htmlToStream(out);
+        // Once Client Object done printing, line is closed and new row is ready:
+        out<< " </td></tr> \n";
+    }
+
+    // Ending table
+    out<<"</table>";
+    return out;
 }
+
 
 
 void ClientList::inputFile(string inputFile)
@@ -269,35 +288,12 @@ void ClientList::inputFile(string inputFile)
     // Close File
     ClientFile.close();
 
-    // Print HTML Table to Console
+    // Print HTML Table to Console and to output.txt
     cout<<"\n\n";
     cout<<*this;
-
-    // Save HTML Table to output.txt
-    this->saveToFile();
 }
 
 
-
-
-ostream &operator<<(ostream &out, ClientList &cl)
-{
-    // First line of html table
-    out<<"table border = '1'> \n";
-    out<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
-
-    // Enter loop to add Students (cl is the CientList, and vl is the vector inside it)
-    for(unsigned short i = 0; i<cl.vl.size(); i++)
-    {
-        cl.vl[i]->htmlToStream(out);
-        // Once Client Object done printing, line is closed and new row is ready:
-        out<< " </td></tr> \n";
-    }
-
-    // Ending table
-    out<<"</table>";
-    return out;
-}
 
 void ClientList::consoleInput()
 {
@@ -494,8 +490,6 @@ void ClientList::consoleInput()
                 }
 
     }
-    // Print the HTML Table to console
+    // Print the HTML Table to console and to output.txt
     cout<<*this;
-    // Prints to output.txt
-    this->saveToFile();
 }
