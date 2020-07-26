@@ -117,7 +117,6 @@ void ClientList::inputFile(string inputFile)
         rowCounter++;
         int spaceCount = 0;
         bool isError = false;
-        cout<<"\n"<<inputName;
 
         //Name Verification
         for(int i = 0; i<inputName.size(); i++)
@@ -160,9 +159,7 @@ void ClientList::inputFile(string inputFile)
 
 
         // Tenure Read-in and Verification
-        cout<<"HERE 1! \n";
         ClientFile>>inputTenure;
-        cout<<"\n"<<inputTenure;
 
         if(inputTenure < 0 || inputTenure > 100)
         {
@@ -195,7 +192,6 @@ void ClientList::inputFile(string inputFile)
             // This gets the next part up to the comma
             getline(ClientFile,inputTier, ',');
             tierVerified = inputTier.at(0);
-            cout<<"\n"<<inputTier;
 
             // First, cast it to lower case if it isn't
             if (tierVerified >= 'A' || tierVerified <= 'Z' )
@@ -244,7 +240,6 @@ void ClientList::inputFile(string inputFile)
             // We read this in rather then use getline, because it is a number and so this makes it simplier.
 
             ClientFile>>inputPoints;
-            cout<<"\n"<<inputPoints;
 
             if(inputPoints < 0 || inputPoints > 100000)
             {
@@ -263,7 +258,6 @@ void ClientList::inputFile(string inputFile)
             // So now we create a Gold Client and push the pointer to the Client List.
 
             Client* clientptr = new GoldClient(inputTenure, inputName, tierVerified);
-            cout<<"\n Made it into the gold block \n";
             // Once new pointer to dynamically allocated memory created, add it to the ClientList:
             vl.push_back(clientptr);
             getline(ClientFile, linetrash);
@@ -279,7 +273,6 @@ void ClientList::inputFile(string inputFile)
         // PlatinumClient tom = PlatinumClient(1, "test", 'a', 800);
         // Client* testptr = &tom;
         vl.push_back(clientptr);
-        cout<<"MADE IT HGERE";
 
         // Once loaded in, need to trash the last comma and restart for the next line
         getline(ClientFile, linetrash);
