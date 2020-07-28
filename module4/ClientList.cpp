@@ -2,9 +2,9 @@
 * ClientList.cpp
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -25,10 +25,10 @@
 ClientList::~ClientList()
 {
     // This function frees the dynamically allocated memory after the vector is done being used
-    for(int i = 0; i<vl.size(); i++)
+    for(int i = 0; i<this->size(); i++)
     {
         // Creates dynamic pointer that is assigned each client pointer, then freed
-        Client* tempPtr = vl.at(i);
+        Client* tempPtr = this->at(i);
         delete tempPtr;     
     }
 }
@@ -46,11 +46,11 @@ ostream &operator<<(ostream &out, ClientList &cl)
     outputFile<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
 
     // Create a loop to add each Client
-    for(unsigned short i = 0; i<cl.vl.size(); i++)
+    for(unsigned short i = 0; i<cl.size(); i++)
     {
         // We use the htmlToStream function, an ofstream and be passed into a ostream function
         // So this is a ofstream passed to htmlToStream expecting an ostream, but the libraries can handle this
-        cl.vl.at(i)->htmlToStream(outputFile);
+        cl.at(i)->htmlToStream(outputFile);
         // Once Client Object done printing, line is closed and new row is ready:
         outputFile<< " </td></tr> \n";
     }
@@ -66,9 +66,9 @@ ostream &operator<<(ostream &out, ClientList &cl)
     out<<"\t <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> \n";
 
     // Enter loop to add Students (cl is the CientList, and vl is the vector inside it)
-    for(unsigned short i = 0; i<cl.vl.size(); i++)
+    for(unsigned short i = 0; i<cl.size(); i++)
     {
-        cl.vl[i]->htmlToStream(out);
+        cl[i]->htmlToStream(out);
         // Once Client Object done printing, line is closed and new row is ready:
         out<< " </td></tr> \n";
     }
@@ -220,7 +220,7 @@ void ClientList::inputFile(string inputFile)
             // Now push the rest of the information and create a Client Pointer, pointing 
             // to a SilverClient Obj.  Then push that pointer into the vector:
             Client* clientptr =  new SilverClient(inputTenure, inputName);
-            vl.push_back(clientptr); // Adding to Vector
+            this->push_back(clientptr); // Adding to Vector
 
             // Now that it is added and line is trashed, we must restart from the beginning
             continue;
@@ -259,7 +259,7 @@ void ClientList::inputFile(string inputFile)
 
             Client* clientptr = new GoldClient(inputTenure, inputName, tierVerified);
             // Once new pointer to dynamically allocated memory created, add it to the ClientList:
-            vl.push_back(clientptr);
+            this->push_back(clientptr);
             getline(ClientFile, linetrash);
             continue;
 
@@ -272,7 +272,7 @@ void ClientList::inputFile(string inputFile)
         // --- 
         // PlatinumClient tom = PlatinumClient(1, "test", 'a', 800);
         // Client* testptr = &tom;
-        vl.push_back(clientptr);
+        this->push_back(clientptr);
 
         // Once loaded in, need to trash the last comma and restart for the next line
         getline(ClientFile, linetrash);
@@ -280,6 +280,9 @@ void ClientList::inputFile(string inputFile)
 
     // Close File
     ClientFile.close();
+
+    // Sort ClientList
+    this->sort();
 
     // Print HTML Table to Console and to output.txt
     cout<<"\n\n";
@@ -398,7 +401,7 @@ void ClientList::consoleInput()
         {
             // Create the client pointer and push it to the ClientList
             Client* newcl =  new SilverClient(tenureInput, inputName);
-            vl.push_back(newcl);
+            this->push_back(newcl);
 
             // Then we have to ask if the user wants to add another before restarting
             cout<<"\n Would you like to...?";
@@ -435,7 +438,7 @@ void ClientList::consoleInput()
         {
             // Create the client pointer and push it to the ClientList
             Client* newcl =  new GoldClient(tenureInput, inputName, tierInput);
-            vl.push_back(newcl);
+            this->push_back(newcl);
 
             // Then we have to ask if the user wants to add another before restarting
             cout<<"\n Would you like to...?";
@@ -465,7 +468,7 @@ void ClientList::consoleInput()
         }
         // Push this new client to the list
         Client* newcl =  new PlatinumClient(tenureInput, inputName, tierInput, pointsInput);
-        vl.push_back(newcl);
+        this->push_back(newcl);
 
 
         // Ask if they want to add another client
@@ -483,6 +486,8 @@ void ClientList::consoleInput()
                 }
 
     }
+    // Sort Vector
+    this->sort();
     // Print the HTML Table to console and to output.txt
     cout<<*this;
 }

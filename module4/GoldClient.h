@@ -2,9 +2,9 @@
 * GoldClient.h
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -25,6 +25,7 @@
 #include "Client.h"
 
 
+
 class GoldClient:public Client
 {
     private:
@@ -40,6 +41,15 @@ class GoldClient:public Client
 
     // ostream function for HTML stream
     ostream& htmlToStream(ostream &out);
+
+    // Get accessor used to determine type for relational operator
+    char getType() { return '1'; }
+
+    // Relational Operator
+    virtual bool operator>(Client*);
+
+    // Need these here for relational operator to work, should I do somethign else? ----------------------
+    float getPoints() { return 0; }
 };
 
 #endif

@@ -2,9 +2,9 @@
 * ClientList.h
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -32,11 +32,13 @@
 #include "SilverClient.h"
 #include "GoldClient.h"
 #include "PlatinumClient.h"
+#include "SVector.h"
 
 using namespace std;
 
 // ClientList Class
-class ClientList
+// Client inherits from SVector which in turn inherits from the vector class
+class ClientList : public SVector<Client*>
 {
     public:
 
@@ -51,10 +53,6 @@ class ClientList
 
     // This is for printing each Client ponter's Client Obj to console
     friend ostream &operator<<(ostream &out, ClientList &cl);
-
-    // This is the vector that is used to store Client pointers to the different clients
-    private:
-    vector<Client*>vl;
 };
 
 

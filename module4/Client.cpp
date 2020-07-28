@@ -2,9 +2,9 @@
 * Client.cpp
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *

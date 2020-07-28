@@ -2,9 +2,9 @@
 * SilverClient.h
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -25,17 +25,27 @@
 #include "Client.h"
 
 
+
 class SilverClient:public Client
 {
     public:
     // Main Constructor
     SilverClient(short tenure, string name): Client(tenure, name)
     {
-       
     }
+
+    // Get accessor used to determine type for relational operator
+    char getType() { return '0'; }
 
     // stream to HTML 
     ostream& htmlToStream(ostream &out);
+
+    // Relational Operator
+    virtual bool operator>(Client*);
+
+    // Need these here for relational operator to work, should I do somethign else? ----------------------
+    float getPoints() { return 0; }
+    char getTier() { return '\0'; }
 };
 
 #endif

@@ -2,9 +2,9 @@
 * Client.h
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -22,6 +22,8 @@
 #define CLIENT_H
 
 #include <iostream>
+
+#include "SVector.h"
 
 using namespace std;
 
@@ -54,6 +56,16 @@ class Client
 
     // Friend function for stream operator
     friend ostream& operator<<(ostream&out, Client *cl);
+
+    // Overloading the > operator
+    virtual bool operator>(Client*) = 0;
+
+    // Get accessor used to determine type for relational operator
+    virtual char getType() = 0;
+
+    // These needed so relational operator works
+    virtual float getPoints() = 0;
+    virtual char getTier() = 0;
 };
 
 

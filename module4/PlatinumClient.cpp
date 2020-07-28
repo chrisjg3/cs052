@@ -2,9 +2,9 @@
 * PlatinumClient.cpp
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -28,4 +28,62 @@ ostream& PlatinumClient::htmlToStream(ostream &out)
     out<< " </td> <td> " << this->getTier();
     out<< " </td> <td> " << this->getPoints();
     return out;
+}
+
+bool PlatinumClient::operator>(Client* otherClPtr)
+{
+    switch (otherClPtr->getType())
+    {
+        // It is comparing a Silver to a Silver
+        case '0':
+            return true;
+
+        // It is comparing a Silver to a Gold
+        case '1':
+            return true;
+            
+            
+
+        // It is comparing a Silver to a Platinum
+        case '2':
+            if(this->getTier() > otherClPtr->getTier())
+            {
+                return true;
+            }
+            
+            else if (this->getTier() == otherClPtr->getTier())
+            {
+                if (this->getPoints() > otherClPtr->getPoints())
+                {
+                    return true;
+                }
+                else if (this->getPoints() == otherClPtr->getPoints())
+                {
+                    // Since Tier and Points are equal, it goes by Tenure
+                    if(this->getTenure()>otherClPtr->getTenure())
+                    {
+                        return true;
+                    }
+                        else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+
+            else
+            {
+                return false;
+            }
+
+        // Default case:
+        default:
+            cout<<"\nError, Client Type Not Valid\n";
+            return false;
+    }
 }

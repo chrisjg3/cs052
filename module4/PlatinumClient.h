@@ -2,9 +2,9 @@
 * PlatinumClient.h
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -27,6 +27,7 @@
 
 
 
+
 class PlatinumClient:public Client
 {
     // private attributes, tier needed as well as points
@@ -38,6 +39,8 @@ class PlatinumClient:public Client
     public:
     float getPoints() { return plantinumPoints; }
     char getTier() { return tier; }
+    // Get accessor used to determine type for relational operator
+    char getType() { return '2'; }
 
     // Constructor
     PlatinumClient(short tenure, string name, char tier, float plantinumPoints): Client(tenure, name) 
@@ -51,6 +54,9 @@ class PlatinumClient:public Client
 
     // Overloaded stream operator
     friend ostream& operator<<(ostream&out, Client *cl);
+
+    // Relational Operator
+    virtual bool operator>(Client*);
 };
 
 #endif

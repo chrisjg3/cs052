@@ -1,10 +1,10 @@
 /*
-* Project2.h
+* SVector.h
 *
 * COSC 052 2020
-* Project 2
+* Project 3
 *
-* Due on: July 21st
+* Due on: August 2nd
 * Author: Christopher Gallo
 *
 *
@@ -16,24 +16,22 @@
 * References not otherwise commented within the program source code.
 * Note that you should not mention any help from the TAs, the professor,
 * or any code taken from the class textbooks.
-*/
+*/ 
 
-#ifndef PROJECT2_H
-#define PROJECT2_H
+#ifndef SVECTOR_H
+#define SVECTOR_H
 
-#include <iostream>
 #include <vector>
-#include <fstream>
-#include <istream>
-#include <algorithm>
-
-// HeaderFiles to Include
 #include "Client.h"
-#include "ClientList.h"
-#include "SilverClient.h"
-#include "GoldClient.h"
-#include "PlatinumClient.h"
 
+using namespace std;
 
+template <class T>
+class SVector: public vector<T>
+{
+    public:
+    void sort();  
+
+};
 
 #endif
