@@ -33,6 +33,7 @@
 #include "SilverClient.h"
 #include "GoldClient.h"
 #include "PlatinumClient.h"
+#include <typeinfo>
 
 
 
@@ -53,6 +54,9 @@
 8. Maybe this is for OH or presentation, but is ClientList headder styatement correct w/ SVector class?
 9. Rewrite comments so that Relational Operators say "platintum to Platinum" or "Gold to Gold" correctly
 10. Delete both parts of testing code later, aka the cout and the actual else if statement that makes things happen
+11. Include ncomments explaining getPoints and getTier if stay included in Clinet and SilverClient
+12. implement insertion ratgher than current method for sort()
+
 
 - Review code and rubric/pdf to change any names to Project3 etc 
 
@@ -76,5 +80,10 @@
 2. sort should just return nothing and take nothing, yes?
 
 3. Make sure "sorting algorythm in-place" means generate no new variables, should just sort existing vector components 
+
+OH -----
+
+typeid
+Capital As when I convert all to lower case
 
 */

@@ -74,24 +74,10 @@ int main()
             Client* Ptr4 = &gold2;
 
 
-            if(Ptr1>Ptr3)
-            {
-                cout<<"WRONG!\n";
-            }
-            else
-            {
-                cout<<"right!\n";
-            }
-
-            if(Ptr4>Ptr3)
-            {
-                cout<<"right!\n";
-            }
-            else
-            {
-                cout<<"WRONG!\n";
-            }
-
+            if( typeid(sil1) == typeid(sil2))   { cout<< "Test 1 passed\n";}
+            if( typeid(sil1) != typeid(gold1))   { cout<< "Test 2 passed\n";}
+            if( typeid(gold1) == typeid(gold2))   { cout<< "Test 3 passed\n";}
+            if( typeid(plat1) != typeid(sil1))   { cout<< "Test 4 passed\n";}
 
 
 

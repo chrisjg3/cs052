@@ -5,5 +5,5 @@ table border = '1'>
 	 <tr> <td> Bob Gold </td> <td> 5 </td> <td> b </td></tr> 
 	 <tr> <td> Jane Plat </td> <td> 5 </td> <td> a </td> <td> 550 </td></tr> 
 	 <tr> <td> Jane Plat </td> <td> 5 </td> <td> a </td> <td> 650 </td></tr> 
-	 <tr> <td> bottom </td> <td> 1 </td> <td> a </td> <td> 1000 </td></tr> 
+	 <tr> <td> bottom </td> <td> 100 </td> <td> a </td> <td> 10000 </td></tr> 
 </table>
