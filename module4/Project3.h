@@ -57,6 +57,7 @@
 11. Include ncomments explaining getPoints and getTier if stay included in Clinet and SilverClient
 12. implement insertion ratgher than current method for sort()
 13. Go through and delete the getype()s and (and getTier and getPoints fopr Client/silver) and implemeent the typeid() for the objects
+14.  Shoudl the sort be doing the opposite order? descending right so largest should come first?
 
 
 - Review code and rubric/pdf to change any names to Project3 etc 
