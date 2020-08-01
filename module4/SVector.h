@@ -26,7 +26,9 @@
 
 using namespace std;
 
-
+/// Template Class Used to Hold the Sort Function
+///
+/// The sort function allows an array of T Objects to be sorted using the relational operator
 template <class T>
 class SVector: public vector<T>
 {

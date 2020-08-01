@@ -21,6 +21,7 @@
 #ifndef PROJECT2_H
 #define PROJECT2_H
 
+// Libraries to import
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -49,9 +50,12 @@
 
 3. Make Doxygen comments in code and include it in your zip submission
 
+4. Commenting pseudo-done for silverBoth SVectorBoth Project3.h so..... write the rest
+
+5. Edit polymorphism comments to mention it is from relational operator, since calls before are fine?
 
 
-7. Remove pub;ic from class deriving statements, should it be protected instead?
+7. Remove pub;ic from class deriving statements, should it be protected instead?  for another of the other dervies (Svector or Clientlist)
 
 9. Rewrite comments so that Relational Operators say "platintum to Platinum" or "Gold to Gold" correctly
 10. Delete both parts of testing code later, aka the cout and the actual else if statement that makes things happen

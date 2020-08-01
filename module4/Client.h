@@ -27,6 +27,14 @@
 
 using namespace std;
 
+/// This is the Abstract Class of Client.  No Instances of it exist.
+/// It holds the basic attributes of all Clients and basic get functions.
+///
+/// It has getPoints() and getTier() Added as virtual functions because of the relational operator with polymorphism.
+/// The compiler throws an exception for undefined reference because Client has no getPoints or getTier methods.
+/// These are added to prevent that error.
+
+
 class Client
 {
     // Protected Variables that are in all Dervied Client Objects
@@ -63,8 +71,10 @@ class Client
     // Get accessor used to determine type for relational operator
     virtual char getType() = 0;
 
-    // These needed so relational operator works
-    virtual float getPoints() = 0;
+    // These needed so relational operator since calling sort through a template causes the compiler to throw
+    // errors if the methods called don't exist.  Even though a Client object itself would never be asked to call
+    // these methods.
+    virtual float getPoints() = 0; 
     virtual char getTier() = 0;
 };
 

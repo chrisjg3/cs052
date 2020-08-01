@@ -36,8 +36,10 @@
 
 using namespace std;
 
-// ClientList Class
-// Client inherits from SVector which in turn inherits from the vector class
+/// ClientList Class
+/// Client inherits from SVector which in turn inherits from the vector class
+/// This means it inherits the sort function.
+
 class ClientList : public SVector<Client*>
 {
     public:
@@ -51,7 +53,8 @@ class ClientList : public SVector<Client*>
     // This is the destrcutor, used to free dynamically allocated memory
     ~ClientList();
 
-    // This is for printing each Client ponter's Client Obj to console
+    // This is for printing each Client ponter's Client Obj to console and output.txt
+    // It sorts the ClientList first.
     friend ostream &operator<<(ostream &out, ClientList &cl);
 };
 

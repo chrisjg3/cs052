@@ -24,7 +24,13 @@
 
 #include "Client.h"
 
-
+/// This is the Gold Client.
+///
+/// It is similar to Silver, but with an updated relational operator
+/// and getTier() returns an attrribute.
+/// Once again, however, getPoint() is included to keep the compiler from throwing an error.
+/// This happens because the sort method calls this on client pointers, so all derived classes
+/// Must have a copy, even though no GoldClient can ever be asked for this method in the sort function.
 
 class GoldClient:public Client
 {
@@ -48,7 +54,8 @@ class GoldClient:public Client
     // Relational Operator
     virtual bool operator>(Client*);
 
-    // Need these here for relational operator to work, should I do somethign else? ----------------------
+    // As mentioned above, this is here so that the compiler does not throw an error.
+    // Because a Client pointer is asked to used getPoints(), all derived classes must have a copy.
     float getPoints() { return 0; }
 };
 

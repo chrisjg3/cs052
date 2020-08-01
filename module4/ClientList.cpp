@@ -36,6 +36,8 @@ ClientList::~ClientList()
 
 ostream &operator<<(ostream &out, ClientList &cl)
 {
+    // First the stream operator must sort the list
+    cl.sort();
 
     // Opens a file to write to
     ofstream outputFile;
@@ -281,9 +283,6 @@ void ClientList::inputFile(string inputFile)
     // Close File
     ClientFile.close();
 
-    // Sort ClientList
-    this->sort();
-
     // Print HTML Table to Console and to output.txt
     cout<<"\n\n";
     cout<<*this;
@@ -486,8 +485,6 @@ void ClientList::consoleInput()
                 }
 
     }
-    // Sort Vector
-    this->sort();
     // Print the HTML Table to console and to output.txt
     cout<<*this;
 }

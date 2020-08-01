@@ -24,7 +24,14 @@
 
 #include "Client.h"
 
-
+/// The SilverClient is the first version of Client
+///
+/// It has only two attributes: Name and Tenure
+/// getPoints() and getTier() made so that compiler does not through error with sort method
+/// Although the sort method would never call those functions, as the type is determined before
+/// that code meaning no SilverClient will be asked for Tier or Points. 
+///
+/// Relational Operator is built as a method, rather then a friend
 
 class SilverClient:public Client
 {
@@ -43,9 +50,11 @@ class SilverClient:public Client
     // Relational Operator
     virtual bool operator>(Client*);
 
-    // Need these here for relational operator to work, should I do somethign else? ----------------------
-    float getPoints() { return 0; }
-    char getTier() { return '\0'; }
+    // These two methods are created so that compiler does not throw an unreferenced reference exception.
+    // This is because the polymorphism of the ClientList vector means Client pointers are asked
+    // to call all 4 types of attribute get functions, so every derived class must have a copy.
+    float getPoints() {return 0;}
+    char getTier() {return '\0'; }
 };
 
 #endif

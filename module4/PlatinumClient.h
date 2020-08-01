@@ -25,7 +25,11 @@
 #include "Client.h"
 
 
-
+/// This is the PlantinumClient Summary.
+///
+/// This class has a similar strucutre to both SilverClient and GoldClient.
+/// The only difference being that both getTier() and getPoints() actually return
+/// attributes and the relational operators are adjusted accordingly.
 
 
 class PlatinumClient:public Client

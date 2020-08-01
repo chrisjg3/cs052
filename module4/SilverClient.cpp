@@ -28,6 +28,7 @@ ostream& SilverClient::htmlToStream(ostream &out)
     return out;
 }
 
+// Relational Operator
 bool SilverClient::operator>(Client* otherClPtr)
 {
     // Determine which block it falls into:

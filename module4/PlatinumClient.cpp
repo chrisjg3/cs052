@@ -30,33 +30,37 @@ ostream& PlatinumClient::htmlToStream(ostream &out)
     return out;
 }
 
+// Relational Operator
 bool PlatinumClient::operator>(Client* otherClPtr)
 {
     switch (otherClPtr->getType())
     {
-        // It is comparing a Silver to a Silver
+        // It is comparing a Platinum to a Silver
         case '0':
             return true;
 
-        // It is comparing a Silver to a Gold
+        // It is comparing a Platinum to a Gold
         case '1':
             return true;
             
             
 
-        // It is comparing a Silver to a Platinum
+        // It is comparing a Platinum to a Platinum
         case '2':
+            // First it compares Tier
             if(this->getTier() > otherClPtr->getTier())
             {
                 return true;
             }
-            
+            // If Tier is a tie it falls into this code block:
             else if (this->getTier() == otherClPtr->getTier())
             {
+                // It will then check for points
                 if (this->getPoints() > otherClPtr->getPoints())
                 {
                     return true;
                 }
+                // If that doesn't descide it then it will go into this code block:
                 else if (this->getPoints() == otherClPtr->getPoints())
                 {
                     // Since Tier and Points are equal, it goes by Tenure
@@ -69,14 +73,14 @@ bool PlatinumClient::operator>(Client* otherClPtr)
                         return false;
                     }
                 }
-                else
+                else // This is for Points being <
                 {
                     return false;
                 }
                 
             }
 
-            else
+            else  // This is Tier being <
             {
                 return false;
             }
