@@ -26,6 +26,7 @@
 
 using namespace std;
 
+
 template <class T>
 class SVector: public vector<T>
 {

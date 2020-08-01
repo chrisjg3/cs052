@@ -33,12 +33,11 @@ ostream& GoldClient::htmlToStream(ostream &out)
 // Relational Operator
 bool GoldClient::operator>(Client* otherClPtr)
 {
-    // Determine which block it falls into:
     switch (otherClPtr->getType())
     {
         // It is comparing a Silver to a Silver
         case '0':
-        return true;
+            return true;
 
         // It is comparing a Silver to a Gold
         case '1':
@@ -49,30 +48,29 @@ bool GoldClient::operator>(Client* otherClPtr)
             
             else if (this->getTier() == otherClPtr->getTier())
             {
-                // Since Tier is equal, it goes by Tenure
-                if(this->getTenure()>otherClPtr->getTenure())
-                {
-                return true;
-                }
-                else
-                {
-                return false;
-                }
+                    if(this->getTenure()>otherClPtr->getTenure())
+                    {
+                        return true;
+                    }
+                        else
+                    {
+                        return false;
+                    }
             }
 
             else
             {
                 return false;
             }
-            
 
         // It is comparing a Silver to a Platinum
         case '2':
-        return false;
+            return false;
+            
 
         // Default case:
         default:
-        cout<<"\nError, Client Type Not Valid\n";
-        return false;
+            cout<<"\nError, Client Type Not Valid\n";
+            return false;
     }
 }

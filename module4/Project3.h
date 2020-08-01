@@ -26,6 +26,7 @@
 #include <fstream>
 #include <istream>
 #include <algorithm>
+#include <typeinfo>
 
 // HeaderFiles to Include
 #include "Client.h"
@@ -46,17 +47,17 @@
 0.5 Override > operators, check how to do that properly and then JUST use > in sort() I believe
 
 
-3. Make Doxygen graph thing AND include it in your zip submission
-4. Make clientlist derived from Svector 
-5. Chnage calls so clientlist is editted directly not have a vector inside it changed
-6. call sort before console out and saving output.txt
+3. Make Doxygen comments in code and include it in your zip submission
+
+
+
 7. Remove pub;ic from class deriving statements, should it be protected instead?
-8. Maybe this is for OH or presentation, but is ClientList headder styatement correct w/ SVector class?
+
 9. Rewrite comments so that Relational Operators say "platintum to Platinum" or "Gold to Gold" correctly
 10. Delete both parts of testing code later, aka the cout and the actual else if statement that makes things happen
 11. Include ncomments explaining getPoints and getTier if stay included in Clinet and SilverClient
-12. implement insertion ratgher than current method for sort()
-13. Go through and delete the getype()s and (and getTier and getPoints fopr Client/silver) and implemeent the typeid() for the objects
+
+
 14.  Shoudl the sort be doing the opposite order? descending right so largest should come first?
 
 
@@ -72,20 +73,17 @@
 
 
 ******************* QUESTIONS FOR OH **************
+1. Doxygn Documentation Complete?
 
-1. So now vector is not an attribute but a base class?
+2. Is my sorting algorithm correct? (descending order)
 
-1.5 Chekc if not friend function is alright for Client relational operastor override
+3. 
 
-2. Had to add get tier and gfet poiunts to base class to get it to work w/ operator> is there a WAY TO FIX THIS?
 
-2. sort should just return nothing and take nothing, yes?
-
-3. Make sure "sorting algorythm in-place" means generate no new variables, should just sort existing vector components 
 
 OH -----
 
-typeid
+
 Capital As when I convert all to lower case
 
 */

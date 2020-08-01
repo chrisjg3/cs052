@@ -27,18 +27,19 @@ void SVector<T>::sort()
     // The minus one is included because last position will end up being the largest.
     for(int x = 0; x<this->size() - 1; x++) 
     {
-        int currentLowest = x;
+        int currentHighest = x;
 
         for(int i = x; i<this->size(); i++)
         {            
-            if ( *(this->at(currentLowest)) > (this->at(i)) )
+            if ( *(this->at(i)) > (this->at(currentHighest)))
             {
-                currentLowest = i;
+                currentHighest = i;
 
                 T tempPtr;
                 tempPtr = this->at(x);
-                this->at(x) = this->at(currentLowest);
-                this->at(currentLowest) = tempPtr;
+                this->at(x) = this->at(currentHighest);
+                this->at(currentHighest) = tempPtr;
+                tempPtr = nullptr;
             }
         }
     }
@@ -47,5 +48,6 @@ void SVector<T>::sort()
 
 
 
-// Needed because compiler issue?? ------------------------------- 
+// This is needed to force a SVector template to be made with Client* 
+// Otherwise, the compiler throws an error when trying to reference sort() from ClientList
 template class SVector<Client*>;
