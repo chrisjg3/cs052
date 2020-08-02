@@ -45,27 +45,20 @@
 // ***************** TO DO *************
 /*
 
-0.5 Override > operators, check how to do that properly and then JUST use > in sort() I believe
-
-
-3. Make Doxygen comments in code and include it in your zip submission
-
-4. Commenting pseudo-done for silverBoth SVectorBoth Project3.h so..... write the rest
 
 5. Edit polymorphism comments to mention it is from relational operator, since calls before are fine?
 
 
-7. Remove pub;ic from class deriving statements, should it be protected instead?  for another of the other dervies (Svector or Clientlist)
-
-9. Rewrite comments so that Relational Operators say "platintum to Platinum" or "Gold to Gold" correctly
 10. Delete both parts of testing code later, aka the cout and the actual else if statement that makes things happen
-11. Include ncomments explaining getPoints and getTier if stay included in Clinet and SilverClient
 
 
-14.  Shoudl the sort be doing the opposite order? descending right so largest should come first?
+14.  OH Questions
 
 
-- Review code and rubric/pdf to change any names to Project3 etc 
+15. Extra Credit for caps, if have time implement that
+
+
+
 
 
 
@@ -74,6 +67,12 @@
 
 1. Double check honor code statemnts fdr basic errors
 
+3. Make Doxygen comments in code and include it in your zip submission
+
+11.  DOUBLE CHECK ncomments explaining getPoints and getTier if stay included in Clinet and SilverClient, make sure don't lose points
+
+13. Review code and rubric/pdf to change any names to Project3 etc 
+
 
 
 ******************* QUESTIONS FOR OH **************
@@ -81,13 +80,7 @@
 
 2. Is my sorting algorithm correct? (descending order)
 
-3. 
+3. Should any of my classes be protected?  Sp[ecifally SilverClient Gold/Plat etc ?
 
-
-
-OH -----
-
-
-Capital As when I convert all to lower case
 
 */

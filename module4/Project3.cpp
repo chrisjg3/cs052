@@ -55,33 +55,6 @@ int main()
             cout<<"Exiting..."<<endl;
             menuActive = false;
         }
-        else if (choice == '4') // Exitting
-        {
-            cout<<"This is for testing: "<<endl;
-            // DELETE THIS WHOLE SECTION LATER -------------------------------
-
-            SilverClient sil1 = SilverClient(10, "John");
-            SilverClient sil2 = SilverClient(2, "Sam");
-            GoldClient gold1 = GoldClient(2, "Edge", 'B');
-            GoldClient gold2 = GoldClient(30, "Big Ten", 'A');
-            PlatinumClient plat1 = PlatinumClient(1, "little guy", 'C', 200);
-            PlatinumClient plat2 = PlatinumClient(2, "sligghtly bigger", 'D', 30000);
-            cout<<"\n\n";
-
-            Client* Ptr1 = &sil1;
-            Client* Ptr2 = &sil2;
-            Client* Ptr3 = &gold1;
-            Client* Ptr4 = &gold2;
-
-
-            if( typeid(sil1) == typeid(sil2))   { cout<< "Test 1 passed\n";}
-            if( typeid(sil1) != typeid(gold1))   { cout<< "Test 2 passed\n";}
-            if( typeid(gold1) == typeid(gold2))   { cout<< "Test 3 passed\n";}
-            if( typeid(plat1) != typeid(sil1))   { cout<< "Test 4 passed\n";}
-
-
-
-        }
         else 
         {
             // This is reached if invalid option put in for menu
@@ -107,7 +80,7 @@ char displayMenu()
     cout<<"1. Input Clients From File\n";
     cout<<"2. Use Console to Input Clients\n";
     cout<<"3. Exit Program \n\n";
-    cout<<"4. DELETEW THIS COUT AND ACTUAL CODE LATER \n\n";
+
     cin>>choice;
     
     // return the choice so main knows what to run.

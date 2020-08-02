@@ -38,8 +38,8 @@ using namespace std;
 
 /// ClientList Class
 /// Client inherits from SVector which in turn inherits from the vector class
-/// This means it inherits the sort function.
-
+/// This means it inherits the sort function.  I Left as public function so that all public 
+/// methods from vector inherited to SVector remain public in ClientList.
 class ClientList : public SVector<Client*>
 {
     public:
