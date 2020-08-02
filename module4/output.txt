@@ -1,10 +1,9 @@
 table border = '1'> 
 	 <tr> <th> Client </th> <th> Tenure </th> <th> Tier </th> <th> Platinum Points </th> </tr> 
-	 <tr> <td> top </td> <td> 100 </td> <td> a </td> <td> 10000 </td></tr> 
+	 <tr> <td> top </td> <td> 100 </td> <td> a </td> <td> 900 </td></tr> 
 	 <tr> <td> Jane Plat </td> <td> 5 </td> <td> a </td> <td> 650 </td></tr> 
 	 <tr> <td> Jane Plat </td> <td> 5 </td> <td> a </td> <td> 550 </td></tr> 
-	 <tr> <td> mid </td> <td> 2 </td> <td> c </td></tr> 
 	 <tr> <td> Bob Gold </td> <td> 5 </td> <td> b </td></tr> 
 	 <tr> <td> John Doe </td> <td> 2 </td></tr> 
-	 <tr> <td> bottom </td> <td> 1 </td></tr> 
+	 <tr> <td> bot </td> <td> 1 </td></tr> 
 </table>
