@@ -42,7 +42,7 @@ bool GoldClient::operator>(Client* otherClPtr)
         // It is comparing a Gold to a Gold
         case '1':
         // First compares Tier to break the tie
-            if(this->getTier() > otherClPtr->getTier())
+            if(!(this->getTier() > otherClPtr->getTier()))
             {
                 return true;
             }

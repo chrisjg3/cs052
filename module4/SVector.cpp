@@ -42,7 +42,6 @@ void SVector<T>::sort()
                 tempPtr = this->at(x);
                 this->at(x) = this->at(currentHighest);
                 this->at(currentHighest) = tempPtr;
-                tempPtr = nullptr;
             }
         }
     }

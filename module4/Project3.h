@@ -45,19 +45,15 @@
 // ***************** TO DO *************
 /*
 
+3. Doxygen way: Description then followed by tags
+4. Add Auhtor and Date and Version on project3
 
 5. Edit polymorphism comments to mention it is from relational operator, since calls before are fine?
 
 
-10. Delete both parts of testing code later, aka the cout and the actual else if statement that makes things happen
-
-
-14.  OH Questions
-
-
 15. Extra Credit for caps, if have time implement that
 
-
+17. Double check for additional requirements
 
 
 
@@ -76,11 +72,6 @@
 
 
 ******************* QUESTIONS FOR OH **************
-1. Doxygn Documentation Complete?
-
-2. Is my sorting algorithm correct? (descending order)
-
-3. Should any of my classes be protected?  Sp[ecifally SilverClient Gold/Plat etc ?
 
 
 */
