@@ -29,11 +29,10 @@ using namespace std;
 
 /// This is the Abstract Class of Client.  No Instances of it exist.
 /// It holds the basic attributes of all Clients and basic get functions.
-///
-/// It has getPoints() and getTier() Added as virtual functions because of the relational operator with polymorphism.
-/// The compiler throws an exception for undefined reference because Client has no getPoints or getTier methods.
-/// These are added to prevent that error.
-
+/// <br>
+/// It has getPoints() and getTier() Added as virtual functions because of the relational operator with polymorphism 
+/// calls those functions from Client pointers and so it, along with all derived variations, must have a copy even though 
+/// they will never use it.
 
 class Client
 {
