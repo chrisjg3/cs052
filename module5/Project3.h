@@ -18,6 +18,11 @@
 * or any code taken from the class textbooks.
 */
 
+/**
+ * \author Christopher Gallo
+ * \date August 4th, 2020
+*/
+
 #ifndef PROJECT2_H
 #define PROJECT2_H
 
@@ -41,37 +46,3 @@
 
 
 #endif
-
-// ***************** TO DO *************
-/*
-
-3. Doxygen way: Description then followed by tags
-4. Add Auhtor and Date and Version on project3
-
-5. Edit polymorphism comments to mention it is from relational operator, since calls before are fine?
-
-
-15. Extra Credit for caps, if have time implement that
-
-17. Double check for additional requirements
-
-
-
-
-
-********************* Testing ***********************
-
-1. Double check honor code statemnts fdr basic errors
-
-3. Make Doxygen comments in code and include it in your zip submission
-
-11.  DOUBLE CHECK ncomments explaining getPoints and getTier if stay included in Clinet and SilverClient, make sure don't lose points
-
-13. Review code and rubric/pdf to change any names to Project3 etc 
-
-
-
-******************* QUESTIONS FOR OH **************
-
-
-*/

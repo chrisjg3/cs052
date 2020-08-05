@@ -31,17 +31,16 @@ void SVector<T>::sort()
         // current highest set to current x position
         int currentHighest = x;
 
-        for(int i = x; i<this->size(); i++)
+        for(int i = x + 1; i<this->size(); i++)
         {
             // goes through each i index after x and compares            
             if ( *(this->at(i)) > (this->at(currentHighest)))
             {
-                currentHighest = i;
                 // if a new high value is found, i is swapped with the current value at x (using a temporary pointer)
                 T tempPtr;
                 tempPtr = this->at(x);
-                this->at(x) = this->at(currentHighest);
-                this->at(currentHighest) = tempPtr;
+                this->at(x) = this->at(i);
+                this->at(i) = tempPtr;
             }
         }
     }

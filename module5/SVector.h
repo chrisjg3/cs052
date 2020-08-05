@@ -33,6 +33,10 @@ template <class T>
 class SVector: public vector<T>
 {
     public:
+    /**
+     * Sort is the only additional function added to vector to creaet SVector (which ClientList inherits from).
+     * Sort rearranges the objects (in this case Client Pointers) in descending order.
+    */
     void sort();  
 
 };

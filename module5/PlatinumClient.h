@@ -41,26 +41,54 @@ class PlatinumClient:public Client
 
     // Public Functions Start Here
     public:
+    /**
+     *  getPoints is added as platinium is the only class that has points
+     *  \return is the plantinumPoints attribute
+    */ 
     float getPoints() { return plantinumPoints; }
+    /**
+     * This is the accessor function for tier
+     * \return is the tier attribute
+    */ 
     char getTier() { return tier; }
-    // Get accessor used to determine type for relational operator
-    char getType() { return '2'; }
 
-    // Constructor
+    /** 
+     * Get accessor used to determine type for relational operator
+     * \return is either 0 or 1 or 2, depending on the Client derived class
+    */
+   char getType() { return '2'; }
+
+    /** Constructor
+    * This is the main contrcutor
+    * \param tenure is passed to base class
+    * \param name is passed to base class
+    * \param tier is set to tier by the Platinum Contrcutor
+    * \param plantinumPoints is set to plantinumPoints by the Platinum Contrcutor
+    */
     PlatinumClient(short tenure, string name, char tier, float plantinumPoints): Client(tenure, name) 
     { 
         this->tier = tier;
         this->plantinumPoints = plantinumPoints;
     }
 
-    // HTML ostream function
-    ostream& htmlToStream(ostream &out);
+    /** 
+     * HTML ostream function, converts Plantintum Object into an html row
+     * \param out& is the cout stream object
+    */
+   ostream& htmlToStream(ostream &out);
 
-    // Overloaded stream operator
-    friend ostream& operator<<(ostream&out, Client *cl);
+    /** 
+     * Overloaded stream operator
+     * \param out& is the cout stream object
+     * \param cl* is the ClientList
+    */
+   friend ostream& operator<<(ostream&out, Client *cl);
 
-    // Relational Operator
-    virtual bool operator>(Client*);
+    /** 
+     * Relational Operator
+     * \param Client* is passed from the ClientList in the sort function to this operator
+    */
+   virtual bool operator>(Client*);
 };
 
 #endif

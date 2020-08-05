@@ -40,22 +40,41 @@ class GoldClient:public Client
 
     public:
     // Get (Accessor) Function
+    /**
+     * This is the only additional get function
+     * \return tier is the tier attribute.
+    */
     char getTier() { return tier; }
 
-    // The main constructor used by the program
+    /** The main constructor used by the program
+     * \param tenure and \param name are just passed to the Client constructor
+     * \param tier is the new attribute that is saved as an attribute
+    */
     GoldClient(short tenure, string name, char tier): Client(tenure, name) { this->tier = tier; }
 
-    // ostream function for HTML stream
+    /** ostream function for HTML stream, converst the GoldClient to an html row
+     * \param &out is the cout object
+     */
     ostream& htmlToStream(ostream &out);
 
-    // Get accessor used to determine type for relational operator
-    char getType() { return '1'; }
+    /** 
+     * Get accessor used to determine type for relational operator
+     * \return is either 0 or 1 or 2, depending on the Client derived class
+    */ 
+   char getType() { return '1'; }
 
-    // Relational Operator
-    virtual bool operator>(Client*);
+    /** 
+     * Relational Operator
+     * \param Client* is passed from the ClientList in the sort function to this operator
+    */
+   virtual bool operator>(Client*);
 
-    // As mentioned above, this is here so that the compiler does not throw an error.
-    // Because a Client pointer is asked to used getPoints(), all derived classes must have a copy.
+    /**
+     * As mentioned in the Client base class comments, the compiler with throw an error in Project 3 because
+     * we call these methods from Client pointers (unlike Project2) so to prevent the error, all derived versions
+     * of the class must have a copy of all methods, even though Gold will never get asked to getPoints()
+     * \return is just 0, as it has no point attribute
+    */
     float getPoints() { return 0; }
 };
 

@@ -48,7 +48,7 @@ bool PlatinumClient::operator>(Client* otherClPtr)
         // It is comparing a Platinum to a Platinum
         case '2':
             // First it compares Tier
-            if(!(this->getTier() > otherClPtr->getTier()))
+            if(!(this->getTier() >= otherClPtr->getTier()))
             {
                 return true;
             }

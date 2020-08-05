@@ -43,18 +43,24 @@ using namespace std;
 class ClientList : public SVector<Client*>
 {
     public:
-
-    // This is used to call the function for inputting from a file
+    /** 
+     * This is used to call the function for inputting from a file.
+     * \param string is the file name that the program will search for 
+    */
     void inputFile(string);
 
-    // This is used to call the function for inputting from console
+    /** This is used to call the function for inputting from console
+    */
     void consoleInput();
 
-    // This is the destrcutor, used to free dynamically allocated memory
+    /** This is the destrcutor, used to free dynamically allocated memory
+     */
     ~ClientList();
 
-    // This is for printing each Client ponter's Client Obj to console and output.txt
-    // It sorts the ClientList first.
+    /** This is for printing each Client ponter's Client Obj to console and output.txt and it sorts before printing
+    * \param out& is the cout object and &cl is the ClientList Object itself
+    * \param cl& is the ClientList
+    */
     friend ostream &operator<<(ostream &out, ClientList &cl);
 };
 

@@ -36,24 +36,46 @@
 class SilverClient:public Client
 {
     public:
-    // Main Constructor
+    /**
+     * Main Constructor
+     * \param tenure is passed to the Client constructor
+     * \param name is passed to the Client constrcutor
+    */
     SilverClient(short tenure, string name): Client(tenure, name)
     {
     }
 
-    // Get accessor used to determine type for relational operator
-    char getType() { return '0'; }
+    /** 
+     * Get accessor used to determine type for relational operator
+     * \return is either 0 or 1 or 2, depending on the Client derived class
+    */
+   char getType() { return '0'; }
 
-    // stream to HTML 
+    /** 
+     * Stream to HTML, allows SilverClient to be formattedf into an html row
+     * \param out& is the cout stream object
+    */  
     ostream& htmlToStream(ostream &out);
 
-    // Relational Operator
+    /** 
+     * Relational Operator
+     * \param Client* is passed from the ClientList in the sort function to this operator
+    */
     virtual bool operator>(Client*);
 
-    // These two methods are created so that compiler does not throw an unreferenced reference exception.
-    // This is because the polymorphism of the ClientList vector means Client pointers are asked
-    // to call all 4 types of attribute get functions, so every derived class must have a copy.
+    /**
+     * As mentioned in the Client base class comments, the compiler with throw an error in Project 3 because
+     * we call these methods from Client pointers (unlike Project2) so to prevent the error, all derived versions
+     * of the class must have a copy of all methods, even though Gold will never get asked to getPoints()
+     * \return is just 0, as it has no point attribute
+    */
     float getPoints() {return 0;}
+    /**
+     * Similarly to getPoints(), SilverClient needs a getTier() despite never having it be used. The compiler with throw an error in Project 3 because
+     * we call these methods from Client pointers (unlike Project2) so to prevent the error, all derived versions
+     * of the class must have a copy of all methods.
+     * \return is the null character as SilverClient has no Tier attribute
+    */
     char getTier() {return '\0'; }
 };
 

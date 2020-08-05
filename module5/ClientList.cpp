@@ -196,7 +196,7 @@ void ClientList::inputFile(string inputFile)
             tierVerified = inputTier.at(0);
 
             // First, cast it to lower case if it isn't
-            if (tierVerified >= 'A' || tierVerified <= 'Z' )
+            if (tierVerified >= 'A' && tierVerified <= 'Z' )
             {
                 tierVerified = tolower(tierVerified);
             }
